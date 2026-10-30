@@ -16,6 +16,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -26,7 +27,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px 16px 40px;
+      padding: 16px 12px 48px;
     }
 
     .font-cinzel {
@@ -35,21 +36,22 @@
 
     header {
       text-align: center;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
+      width: 100%;
     }
 
     h1 {
       color: #dfb76c;
-      font-size: 28px;
-      letter-spacing: 3px;
-      margin-bottom: 6px;
-      text-shadow: 0 0 20px rgba(223, 183, 108, 0.45);
+      font-size: clamp(20px, 6vw, 28px);
+      letter-spacing: 2.5px;
+      margin-bottom: 4px;
+      text-shadow: 0 0 16px rgba(223, 183, 108, 0.45);
     }
 
     p.subtitle {
-      font-size: 13px;
+      font-size: clamp(11px, 3.2vw, 13px);
       color: #a59cb6;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
     }
 
     /* コントロール群 */
@@ -57,8 +59,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 28px;
+      gap: 12px;
+      margin-bottom: 20px;
       width: 100%;
       max-width: 820px;
     }
@@ -68,14 +70,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
     }
 
     .selector-label {
       font-size: 11px;
       color: #dfb76c;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       font-weight: 600;
     }
@@ -84,24 +86,31 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       background: rgba(255, 255, 255, 0.04);
-      padding: 5px;
+      padding: 4px;
       border-radius: 12px;
       border: 1px solid rgba(223, 183, 108, 0.22);
       backdrop-filter: blur(8px);
+      width: 100%;
+      max-width: 620px;
     }
 
     .nav-btn {
       background: transparent;
       border: 1px solid transparent;
       color: #bfb8cc;
-      padding: 7px 14px;
+      padding: 8px 12px;
+      min-height: 40px;
       font-size: 12px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1 1 auto;
     }
 
     .nav-btn:hover {
@@ -123,10 +132,11 @@
       max-width: 520px;
       display: flex;
       align-items: center;
-      background: rgba(14, 11, 24, 0.75);
+      background: rgba(14, 11, 24, 0.85);
       border: 1px solid rgba(223, 183, 108, 0.3);
-      border-radius: 20px;
-      padding: 5px 16px;
+      border-radius: 24px;
+      padding: 4px 14px;
+      min-height: 46px;
       transition: border-color 0.2s;
     }
     .question-box:focus-within {
@@ -144,7 +154,7 @@
       font-family: inherit;
     }
     .question-box input::placeholder {
-      color: #6c637c;
+      color: #726884;
     }
 
     /* 展開ボタン */
@@ -155,16 +165,20 @@
       font-size: 15px;
       font-weight: 800;
       letter-spacing: 1.5px;
-      padding: 12px 38px;
+      padding: 13px 36px;
+      min-height: 48px;
       border-radius: 30px;
       cursor: pointer;
       box-shadow: 0 4px 18px rgba(223, 183, 108, 0.35);
       transition: transform 0.1s ease, filter 0.2s ease;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       font-family: inherit;
-      margin-top: 6px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 4px;
     }
 
     .draw-btn:hover {
@@ -175,74 +189,165 @@
       transform: scale(0.97);
     }
 
+    /* 表示切り替え（スワイプ/グリッド）バー */
+    .mobile-view-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .view-toggle-btns {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px;
+      border-radius: 8px;
+      border: 1px solid rgba(223, 183, 108, 0.2);
+    }
+
+    .view-btn {
+      background: transparent;
+      border: none;
+      color: #a59cb6;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .view-btn.active {
+      background: rgba(223, 183, 108, 0.25);
+      color: #dfb76c;
+      font-weight: 700;
+    }
+
+    .card-count-indicator {
+      font-size: 11px;
+      color: #a59cb6;
+      letter-spacing: 0.5px;
+    }
+
     /* カード表示エリア */
     .cards-wrapper {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 22px;
+      gap: 16px;
       width: 100%;
       max-width: 1200px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
+      transition: all 0.3s ease;
     }
 
+    /* モバイルのスワイプモード時 */
+    .cards-wrapper.swipe-mode {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 14px;
+      padding-left: 8px;
+      padding-right: 8px;
+      -webkit-overflow-scrolling: touch;
+      gap: 14px;
+    }
+
+    .cards-wrapper.swipe-mode .card-slot {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+    }
+
+    /* カードスロット */
     .card-slot {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 210px;
-      animation: fadeInSlot 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      width: clamp(140px, 44vw, 210px);
+      animation: fadeInSlot 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes fadeInSlot {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .slot-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: #dfb76c;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      margin-bottom: 6px;
+      letter-spacing: 0.8px;
       text-align: center;
-      min-height: 20px;
+      min-height: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      word-break: break-all;
     }
 
-    .card-frame {
-      width: 210px;
-      height: 334px;
-      border-radius: 12px;
-      background: #171322;
-      border: 2px solid #dfb76c;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 16px rgba(223, 183, 108, 0.15);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+    /* 3Dカードフリップコンテナ */
+    .card-flip-container {
+      perspective: 1000px;
+      width: 100%;
+      aspect-ratio: 1 / 1.59;
+      border-radius: 10px;
+    }
+
+    .card-flipper {
       position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.2, 0.85, 0.32, 1.2);
     }
 
-    .card-frame img {
+    .card-flipper.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back-side {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #dfb76c;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 12px rgba(223, 183, 108, 0.12);
+      background: #171322;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-back-side {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+
+    .card-front {
+      transform: rotateY(180deg);
+    }
+
+    .card-front img, .card-back-side img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease;
     }
 
-    .card-frame img.reversed {
+    .card-front img.reversed {
       transform: rotate(180deg);
-    }
-
-    .card-back-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .card-back-fallback {
@@ -253,32 +358,33 @@
       align-items: center;
       justify-content: center;
       color: #dfb76c;
-      font-size: 34px;
+      font-size: 28px;
       border: 2px dashed rgba(223, 183, 108, 0.3);
       background: radial-gradient(circle, #27213b 0%, #100e18 100%);
     }
 
     /* カード詳細解説 */
     .card-details {
-      margin-top: 10px;
+      margin-top: 8px;
       text-align: center;
       width: 100%;
     }
 
     .card-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 4px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .card-suit-tag {
-      font-size: 10px;
-      padding: 1px 6px;
+      font-size: 9px;
+      padding: 1px 5px;
       border-radius: 4px;
       background: rgba(223, 183, 108, 0.15);
       color: #dfb76c;
@@ -287,11 +393,11 @@
 
     .card-position {
       display: inline-block;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      padding: 2px 10px;
+      padding: 2px 8px;
       border-radius: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .position-upright {
@@ -307,25 +413,25 @@
     }
 
     .card-desc {
-      font-size: 12px;
+      font-size: 11px;
       color: #c9bfd0;
-      line-height: 1.6;
+      line-height: 1.55;
       text-align: left;
-      background: rgba(0, 0, 0, 0.48);
-      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.52);
+      padding: 8px 10px;
       border-radius: 8px;
       border-left: 3px solid #dfb76c;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .desc-keywords {
-      font-size: 11px;
+      font-size: 10px;
       color: #dfb76c;
       font-weight: 600;
       border-bottom: 1px dashed rgba(223, 183, 108, 0.25);
-      padding-bottom: 4px;
+      padding-bottom: 3px;
     }
 
     .desc-body {
@@ -333,7 +439,7 @@
     }
 
     .desc-advice {
-      font-size: 11px;
+      font-size: 10px;
       color: #ffe6a4;
       background: rgba(223, 183, 108, 0.08);
       padding: 4px 6px;
@@ -343,9 +449,9 @@
 
     /* Yes/No バッジ */
     .yesno-badge {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .badge-yes { color: #5ce691; }
     .badge-no { color: #ff6b6b; }
@@ -355,10 +461,10 @@
     .overall-panel {
       width: 100%;
       max-width: 820px;
-      background: rgba(20, 17, 30, 0.82);
+      background: rgba(20, 17, 30, 0.88);
       border: 1px solid rgba(223, 183, 108, 0.35);
       border-radius: 14px;
-      padding: 18px 22px;
+      padding: 16px;
       display: none;
       backdrop-filter: blur(10px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -368,28 +474,32 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-bottom: 1px solid rgba(223, 183, 108, 0.2);
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }
 
     .overall-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #dfb76c;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
     }
 
     .copy-btn {
       background: rgba(223, 183, 108, 0.15);
       border: 1px solid rgba(223, 183, 108, 0.4);
       color: #dfb76c;
-      font-size: 12px;
-      padding: 5px 12px;
+      font-size: 11px;
+      padding: 6px 12px;
+      min-height: 32px;
       border-radius: 14px;
       cursor: pointer;
       transition: all 0.2s;
       font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .copy-btn:hover {
@@ -398,8 +508,8 @@
     }
 
     .overall-body {
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 1.65;
       color: #d8cfe0;
       white-space: pre-line;
     }
@@ -416,7 +526,20 @@
       font-size: 11px;
       color: #736982;
       text-align: center;
-      padding-top: 30px;
+      padding-top: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .card-slot {
+        width: clamp(140px, 45vw, 190px);
+      }
+      .btn-group {
+        width: 100%;
+      }
+      .nav-btn {
+        font-size: 11px;
+        padding: 8px 6px;
+      }
     }
   </style>
 </head>
@@ -433,8 +556,8 @@
       <span class="selector-label">✦ デッキの選択 ✦</span>
       <div class="btn-group">
         <button class="nav-btn active" onclick="setDeckFilter('full', this)">フルデッキ (78枚)</button>
-        <button class="nav-btn" onclick="setDeckFilter('major', this)">大アルカナのみ (22枚)</button>
-        <button class="nav-btn" onclick="setDeckFilter('minor', this)">小アルカナのみ (56枚)</button>
+        <button class="nav-btn" onclick="setDeckFilter('major', this)">大アルカナ (22枚)</button>
+        <button class="nav-btn" onclick="setDeckFilter('minor', this)">小アルカナ (56枚)</button>
       </div>
     </div>
 
@@ -442,18 +565,18 @@
     <div class="selector-group">
       <span class="selector-label">✦ 展開法の選択 ✦</span>
       <div class="btn-group">
-        <button class="nav-btn active" onclick="setSpreadMode('one', this)">ワンオラクル (1枚)</button>
-        <button class="nav-btn" onclick="setSpreadMode('three', this)">スリーカード (3枚)</button>
-        <button class="nav-btn" onclick="setSpreadMode('relation', this)">相手の気持ち (4枚)</button>
-        <button class="nav-btn" onclick="setSpreadMode('celtic', this)">ケルト十字 (10枚)</button>
-        <button class="nav-btn" onclick="setSpreadMode('yesno', this)">Yes / No (1枚)</button>
+        <button class="nav-btn active" onclick="setSpreadMode('one', this)">1枚 (託宣)</button>
+        <button class="nav-btn" onclick="setSpreadMode('three', this)">3枚 (時系列)</button>
+        <button class="nav-btn" onclick="setSpreadMode('relation', this)">4枚 (相手の気)</button>
+        <button class="nav-btn" onclick="setSpreadMode('celtic', this)">10枚 (ケルト十字)</button>
+        <button class="nav-btn" onclick="setSpreadMode('yesno', this)">Yes/No (1枚)</button>
       </div>
     </div>
 
     <!-- 任意質問入力 -->
     <div class="question-box">
       <i data-lucide="help-circle" style="width:16px;height:16px;color:#dfb76c;margin-right:8px;flex-shrink:0;"></i>
-      <input type="text" id="userQuestion" placeholder="占いたい問い（例: 今後の仕事展開、あの人の心境、決断への助言）" />
+      <input type="text" id="userQuestion" placeholder="占いたい問い（例: 今後の仕事展開、相手の心境）" />
     </div>
 
     <!-- カード展開ボタン -->
@@ -463,12 +586,25 @@
     </button>
   </div>
 
+  <!-- モバイル向け表示切り替えバー -->
+  <div class="mobile-view-bar" id="viewBar" style="display:none;">
+    <span class="card-count-indicator" id="cardCountIndicator"></span>
+    <div class="view-toggle-btns">
+      <button class="view-btn active" id="btnGrid" onclick="toggleDisplayMode('grid')">グリッド</button>
+      <button class="view-btn" id="btnSwipe" onclick="toggleDisplayMode('swipe')">横スワイプ</button>
+    </div>
+  </div>
+
   <!-- カード表示エリア -->
   <div class="cards-wrapper" id="displayArea">
     <div class="card-slot">
       <div class="slot-label">託宣の準備</div>
-      <div class="card-frame">
-        <img src="bh.jpg" alt="Card Back" class="card-back-img" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'card-back-fallback\'>✦<br><span style=\'font-size:11px;color:#a49cb2;margin-top:8px;\'>TAROT</span></div>';">
+      <div class="card-flip-container">
+        <div class="card-flipper">
+          <div class="card-back-side">
+            <img src="bh.jpg" alt="Card Back" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'card-back-fallback\'>✦<br><span style=\'font-size:11px;color:#a49cb2;margin-top:6px;\'>TAROT</span></div>';">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -478,15 +614,18 @@
     <div class="overall-header">
       <span class="overall-title">✦ 運命の総括アドバイス</span>
       <div>
-        <span class="copy-toast" id="copyToast">結果をコピーしました</span>
-        <button class="copy-btn" onclick="copyResult()">結果をコピー</button>
+        <span class="copy-toast" id="copyToast">コピー完了</span>
+        <button class="copy-btn" onclick="copyResult()">
+          <i data-lucide="copy" style="width:13px;height:13px;"></i>
+          <span>結果をコピー</span>
+        </button>
       </div>
     </div>
     <div class="overall-body" id="overallText"></div>
   </div>
 
   <footer>
-    <p>Celestial Tarot • 78 Cards Full Deck Engine • bh.jpg Card Back</p>
+    <p>Celestial Tarot • 78 Cards Full Deck Engine • Mobile Optimized</p>
   </footer>
 
   <script>
@@ -496,332 +635,332 @@
     const tarotDeck = [
       /* --- 大アルカナ (22枚: 00.jpg 〜 21.jpg) --- */
       {
-        id: "maj_00", file: "00.jpg", type: "major", suitName: "大アルカナ", num: "0", name: "愚者",
-        upright: { keywords: "自由・旅立ち・無限の可能性・直感", detail: "固定観念を手放し、純粋な好奇心で新たな一歩を踏み出す時です。計算よりも直感を信じることで未知の扉が開きます。", advice: "先を恐れず、身軽な心で新しい冒険をスタートさせましょう。" },
-        reversed: { keywords: "軽率・無計画・現実逃避・無謀", detail: "自由を履き違えて準備不足のまま飛び出し、足元をすくわれる恐れがあります。衝動的な言動に注意。", advice: "一呼吸置き、足元の安全と現実的な計画を確かめてください。" },
-        yesno: "YES（挑戦が幸運を呼ぶ）"
+        id: "maj_00", file: "00.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "0", name: "愚者",
+        upright: { keywords: "自由・旅立ち・無限の可能性・直感・純真", detail: "固定観念や恐れを手放し、軽やかな足取りで新しいステージへ飛び出す時です。直感を信じて進むことで大きなチャンスが開けます。", advice: "『こうあるべき』という枠を外し、肩の力を抜いて第一歩を踏み出しましょう。" },
+        reversed: { keywords: "軽率・無計画・現実逃避・無謀・足元の油断", detail: "自由を求めるあまり、現実の準備や周囲への配慮がおろそかになっているサインです。一度立ち止まる冷静さを。", advice: "身軽な好奇心はそのままに、基本的な準備や確認を怠らないようにしましょう。" },
+        yesno: "YES（前向きな挑戦）"
       },
       {
-        id: "maj_01", file: "01.jpg", type: "major", suitName: "大アルカナ", num: "I", name: "魔術師",
-        upright: { keywords: "創造力・スタート・才能の発揮・実行力", detail: "必要な道具や機会は揃っています。強い意志と自信を持って自ら行動を起こすことで、望む現実を創り出せます。", advice: "受け身をやめ、あなたのアイデアを積極的に形にしていきましょう。" },
-        reversed: { keywords: "空回り・自信過剰・準備不足・口先だけ", detail: "才能を活かしきれず空回りしたり、見栄を張って実力が伴わない状態です。小手先に頼らない誠実さが必要です。", advice: "基本に立ち返り、地道にスキルと信用を積み上げてください。" },
-        yesno: "YES（行動を起こす絶好機）"
+        id: "maj_01", file: "01.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "I", name: "魔術師",
+        upright: { keywords: "創造力・スタート・才能の発揮・強い意志・手腕", detail: "必要な素材や環境は揃っています。自信を持って自らの手で現実を形づくる好機。積極的な提案が成果を生みます。", advice: "自分にできることに集中し、最初のアクションを自分から起こしましょう。" },
+        reversed: { keywords: "空回り・自信過剰・準備不足・スランプ・口先だけ", detail: "実力はあるのに自信が持てないか、言葉ばかり先行している状態です。まずは基礎の確認と誠実な姿勢を。", advice: "背伸びをやめ、今日できる小さなタスクを一つずつ着実に完了させましょう。" },
+        yesno: "YES（行動を起こす好機）"
       },
       {
-        id: "maj_02", file: "02.jpg", type: "major", suitName: "大アルカナ", num: "II", name: "女教皇",
-        upright: { keywords: "直感・洞察・静寂・知性・客観性", detail: "外部の喧騒から離れ、自らの知性と直感に耳を傾ける時です。物事の本質を静かに見抜く高い洞察力が冴え渡ります。", advice: "無理に動かず、一人の静かな時間を設けて思考を深めましょう。" },
-        reversed: { keywords: "神経過敏・冷淡・批判的・閉鎖的", detail: "理屈や白黒思考に囚われて他者に厳しくなり、心が冷え切っている暗示です。寛容さを意識しましょう。", advice: "完璧を求めすぎず、他者や自分の不完全さを温かく受け止めてください。" },
-        yesno: "MAYBE（静観して見極める時）"
+        id: "maj_02", file: "02.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "II", name: "女教皇",
+        upright: { keywords: "直感・洞察力・静寂・内省・知性・客観性", detail: "外側の喧騒から離れ、自分の内なる直感と静けさに耳を傾ける時です。答えはすでにあなたの中にあります。", advice: "無理に結論を急がず、一人の静かな時間を作って思考と感情を整理しましょう。" },
+        reversed: { keywords: "神経過敏・批判的・冷酷・閉鎖性・ヒステリック", detail: "白黒をつけようとして神経が過敏になっているかもしれません。完璧主義を緩め、他者と自分に寛容さを。", advice: "批判的な視点を手放し、心の余白を持って状況を柔らかく受け止めましょう。" },
+        yesno: "MAYBE（静かに見極める時）"
       },
       {
-        id: "maj_03", file: "03.jpg", type: "major", suitName: "大アルカナ", num: "III", name: "女帝",
-        upright: { keywords: "豊穣・愛・母性・実り・心地よさ", detail: "これまでの努力が素晴らしい実を結び、満ち足りた豊かな実りを享受できます。愛情に満ちた心地よい発展期です。", advice: "遠慮せず豊かさを受け取り、五感を喜ばせる時間を過ごしましょう。" },
-        reversed: { keywords: "過保護・怠惰・浪費・感情の暴走", detail: "安心感から怠け癖がついたり、愛情が過干渉や独占欲へと歪んでしまう恐れがあります。適度な自制を。", advice: "自分を甘やかしすぎず、健全な生活リズムと距離感を保ちましょう。" },
-        yesno: "YES（豊かな実りがある）"
+        id: "maj_03", file: "03.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "III", name: "女帝",
+        upright: { keywords: "豊穣・母性・愛・実り・心地よさ・繁栄", detail: "心身が満たされ、これまでの愛情や努力が具体的な実りとなって現れる恵まれた時期です。豊かさを存分に味わいましょう。", advice: "自分自身をたっぷりもてなし、五感が喜ぶ選択を優先してください。" },
+        reversed: { keywords: "散財・感情の暴走・嫉妬・過保護・怠惰・甘え", detail: "安心感が行き過ぎて怠惰になったり、相手に見返りを求めてしまっているサインです。自立した境界線を保ちましょう。", advice: "甘やかしと本当の優しさを区別し、適度な距離感を意識してください。" },
+        yesno: "YES（大いに恵まれる）"
       },
       {
-        id: "maj_04", file: "04.jpg", type: "major", suitName: "大アルカナ", num: "IV", name: "皇帝",
-        upright: { keywords: "統率力・秩序・責任感・現実化・安定", detail: "確固たる意志と責任感を持って物事を推進できます。リーダーシップを発揮し、揺るぎない基盤を築く好機です。", advice: "ブレない信念を持ち、現実的な計画に沿って着実に進めましょう。" },
-        reversed: { keywords: "横暴・頑固・独断・プレッシャー", detail: "自説に固執して孤立したり、責任の重さに押し潰されそうになっています。柔軟さと周囲への傾聴が必要です。", advice: "強情さを捨て、周囲の声に耳を傾けて協調を図ってください。" },
-        yesno: "YES（着実な決断が吉）"
+        id: "maj_04", file: "04.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "IV", name: "皇帝",
+        upright: { keywords: "統率力・秩序・責任感・現実化・強いリーダーシップ", detail: "ブレない信念と責任感を持って物事を推進できる時です。現実的な計画を立て、着実に主導権を握っていきましょう。", advice: "曖昧さを排し、長期的なビジョンと明確なルールを打ち出してください。" },
+        reversed: { keywords: "横暴・頑固・独断専行・意志薄弱・重圧", detail: "意見を押し通そうとして孤立したり、プレッシャーに圧倒されている恐れがあります。柔軟に耳を傾ける姿勢を。", advice: "強情さを手放し、周囲の意見を素直に聞き入れる柔軟性を取り戻しましょう。" },
+        yesno: "YES（現実的な判断が吉）"
       },
       {
-        id: "maj_05", file: "05.jpg", type: "major", suitName: "大アルカナ", num: "V", name: "法皇",
-        upright: { keywords: "慈悲・信頼・良き助言・規範・導き", detail: "信頼できる指導者からのアドバイスや、公序良俗に則った誠実な対応が道を拓きます。信用が深まる時期です。", advice: "独断で悩まず、信頼できる専門家や先輩に相談して知恵を借りましょう。" },
-        reversed: { keywords: "形式主義・偏見・独善・不信感", detail: "古いルールや世間体に縛られすぎて身動きが取れなくなっていたり、独善的な教えに惑わされる恐れがあります。", advice: "形式にとらわれず、本質的に何が大切なのかを自分の頭で考えてください。" },
-        yesno: "YES（誠実な助言に従えば吉）"
+        id: "maj_05", file: "05.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "V", name: "法皇",
+        upright: { keywords: "慈悲・伝統・信頼・良き助言・道徳・規範", detail: "信頼できる先達からの助言や、正統な手順を踏むことが幸運を呼び込みます。約束事を守ることで信用が得られます。", advice: "一人で抱え込まず、信頼できる専門家や先輩に相談して知恵を借りましょう。" },
+        reversed: { keywords: "独善・形式主義・偏見・不信感・古い慣習", detail: "前例や常識に囚われすぎて身動きが取れなくなっている暗示です。本質的でないルールに縛られていないか見直しましょう。", advice: "『世間の常識』ではなく、今の自分にとって真に必要な本質を選んでください。" },
+        yesno: "YES（信頼と助言に従えば吉）"
       },
       {
-        id: "maj_06", file: "06.jpg", type: "major", suitName: "大アルカナ", num: "VI", name: "恋人",
-        upright: { keywords: "調和・選択・相思相愛・情熱・共鳴", detail: "心が歓喜する正しい選択ができる時。人との心地よい絆や共鳴が深まり、情熱を注げる対象と巡り合えます。", advice: "損得勘定ではなく、あなたの心がワクワクする選択肢を選びましょう。" },
-        reversed: { keywords: "不和・迷い・誘惑への屈服・すれ違い", detail: "甘い誘惑に流されて大事な本質を見失ったり、優柔不断で機会を逃す暗示です。誠実なコミュニケーションを。", advice: "目先の快楽に流されず、長期的に信じ合える価値観を優先してください。" },
+        id: "maj_06", file: "06.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "VI", name: "恋人",
+        upright: { keywords: "調和・幸福な選択・情熱・相思相愛・心地よい共鳴", detail: "心から納得のいく『直感的な正しい選択』ができる素晴らしい時期です。純粋な気持ちで人と接することで絆が深まります。", advice: "損得勘定ではなく、心が自然と高鳴りワクワクする選択肢を選びましょう。" },
+        reversed: { keywords: "不和・迷い・目移り・誘惑への屈服・すれ違い", detail: "甘い誘惑に惑わされて本当に大切なことを見失ったり、優柔不断でエネルギーが散漫になっています。", advice: "一時の感情に流されず、長期的に大切にしたい絆を最優先にしてください。" },
         yesno: "YES（心に従う選択を）"
       },
       {
-        id: "maj_07", file: "07.jpg", type: "major", suitName: "大アルカナ", num: "VII", name: "戦車",
-        upright: { keywords: "勝利・前進・突破力・意志・スピード", detail: "相反する課題を巧みにコントロールし、凄まじいスピードで勝利へ突っ走る時です。障害を力強く突破できます。", advice: "躊躇せずアクセルを踏み込み、積極果敢に前進してください。" },
-        reversed: { keywords: "暴走・焦り・衝突・制御不能・挫折", detail: "焦りから周囲が見えなくなって衝突したり、エネルギーが空回りして失速する恐れがあります。クールダウンを。", advice: "一旦ブレーキを踏み、周囲の状況を把握して軌道修正を図りましょう。" },
-        yesno: "YES（勢いに乗って進め）"
+        id: "maj_07", file: "07.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "VII", name: "戦車",
+        upright: { keywords: "勝利・前進・突破力・迅速な行動・自己コントロール", detail: "強い意志で状況をコントロールし、猛スピードで前進する時です。多少の困難もあなたの勢いで突破できます。", advice: "ためらわずに攻めの姿勢を貫いてください。スピード感と決断力が武器になります。" },
+        reversed: { keywords: "暴走・焦り・衝突・制御不能・挫折・空回り", detail: "焦るあまり周囲が見えなくなって衝突したり、エネルギーが空回りしているサインです。一度ブレーキを踏みましょう。", advice: "周囲の状況やペース配分を冷静に見直し、体勢を立て直してください。" },
+        yesno: "YES（勢いよく前進せよ）"
       },
       {
-        id: "maj_08", file: "08.jpg", type: "major", suitName: "大アルカナ", num: "VIII", name: "力",
-        upright: { keywords: "内なる強さ・包容力・不屈・忍耐・誠実", detail: "力任せではなく、優しさと粘り強さで困難を克服する真の強さです。相手の頑なな心も温かい包容力で解けます。", advice: "焦らず時間を味方につけ、誠実な忍耐強さで向き合いましょう。" },
-        reversed: { keywords: "無力感・忍耐切れ・感情の爆発・諦め", detail: "我慢の限界を迎えて投げ出したくなったり、自分を信じられなくなっている状態です。まずは休養が必要です。", advice: "無理に背負い込まず、疲れた心を労って自己回復に専念してください。" },
+        id: "maj_08", file: "08.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "VIII", name: "力",
+        upright: { keywords: "内なる強さ・忍耐・包容力・信頼による克服・不屈", detail: "力づくではなく、優しさと粘り強さで困難を手なずける真の強さです。温かい包容力で時間を味方につけましょう。", advice: "力でねじ伏せようとせず、長期的な信頼関係を信じてじっくり向き合ってください。" },
+        reversed: { keywords: "無力感・諦め・感情の爆発・忍耐切れ・自信喪失", detail: "我慢の限界を感じて投げ出したくなったり、感情に振り回されて弱気になっている状態です。", advice: "自分を責めず、まずは十分な休養を取って心のスタミナを回復させましょう。" },
         yesno: "YES（粘り強さが勝利を呼ぶ）"
       },
       {
-        id: "maj_09", file: "09.jpg", type: "major", suitName: "大アルカナ", num: "IX", name: "隠者",
-        upright: { keywords: "内省・思慮深さ・自己探求・叡智", detail: "喧騒を離れて自らの心と静かに対話する時。人生の深遠な気づきが得られ、未来を照らす確かな灯火が見つかります。", advice: "世間の評価を気にせず、自分の本当の価値観を静かに見つめ直しましょう。" },
-        reversed: { keywords: "孤立・偏屈・現実逃避・頑固な閉鎖", detail: "自室や殻に閉じこもりすぎて他者との関わりを拒絶しています。視野が狭くなり孤独を深めないよう注意。", advice: "頑なな態度を緩め、信頼できる人に小さく心を開いてみましょう。" },
-        yesno: "MAYBE（内省と時期の熟成が必要）"
+        id: "maj_09", file: "09.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "IX", name: "隠者",
+        upright: { keywords: "内省・思慮深さ・自己探求・真理の探究・静寂の叡智", detail: "世間の評価から離れ、自分の本質や本当に大切な価値観と向き合う時間です。確かな心の灯火が見つかります。", advice: "一人の静かな時間を持ち、自分の本当の気持ちや目標を丁寧に書き出してみましょう。" },
+        reversed: { keywords: "孤独感・閉鎖性・現実逃避・偏屈・孤立", detail: "自分の殻に閉じこもりすぎて他者との対話を拒絶していませんか？頑なな心を少し緩めて窓を開きましょう。", advice: "一人で抱え込まず、信頼できる人にだけは素直な本音を小さく打ち明けてみてください。" },
+        yesno: "MAYBE（内なる声と対話せよ）"
       },
       {
-        id: "maj_10", file: "10.jpg", type: "major", suitName: "大アルカナ", num: "X", name: "運命の輪",
-        upright: { keywords: "好転・転換点・チャンス到来・幸運の波", detail: "運命の歯車が噛み合い、事態が一気に好転する絶好のタイミングです。思いがけない好機が舞い込みます。", advice: "巡ってきたチャンスの波を逃さず、迷わず飛び乗ってください。" },
-        reversed: { keywords: "すれ違い・タイミングのズレ・一時的停滞", detail: "今は流れが噛み合わず、無理に動くと空回りします。一時的な逆風を受け入れ、次の好機に向けて準備を。", advice: "焦って結果を求めず、運命のサイクルが巡ってくるのを静かに待ちましょう。" },
-        yesno: "YES（大きな幸運の波）"
+        id: "maj_10", file: "10.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "X", name: "運命の輪",
+        upright: { keywords: "好転・チャンス到来・タイミング・巡り合わせ・飛躍", detail: "運命の歯車が噛み合い、状況が一気に好転する転換点です。準備してきたことを迷わず実行に移しましょう。", advice: "流れが来たと感じたら躊躇せずその波に飛び乗ってください。直感が成功を呼びます。" },
+        reversed: { keywords: "すれ違い・タイミングのズレ・一時的な停滞・逆風", detail: "今は流れが噛み合わない時期。無理に状況を動かそうとせず、次のチャンスに向けて実力を蓄えましょう。", advice: "焦って結果を急がず、次の好転の波が巡ってくるのをじっくり待ちましょう。" },
+        yesno: "YES（大きな転機の波）"
       },
       {
-        id: "maj_11", file: "11.jpg", type: "major", suitName: "大アルカナ", num: "XI", name: "正義",
-        upright: { keywords: "公正・均衡・客観性・誠実・適切な判断", detail: "感情を排し、公平で客観的な判断を下せる時です。これまでの真摯な行いに対して正当な報いがもたらされます。", advice: "情に流されず、事実と誠実さを基準にバランスの良い選択をしてください。" },
-        reversed: { keywords: "不公正・偏見・アンバランス・優柔不断", detail: "一方に偏った見方をしてしまったり、アンバランスな不公平感に悩まされる暗示です。冷静な客観視を。", advice: "自分に都合の良い解釈をしていないか、フラットな視点で見直しましょう。" },
-        yesno: "MAYBE（公正な判断次第）"
+        id: "maj_11", file: "11.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XI", name: "正義",
+        upright: { keywords: "公正・客観性・誠実・適切な判断・均衡と調和", detail: "感情に流されず、冷静かつ公平な判断を下す時です。誠実に行動してきたことに対して正当な結果が返ってきます。", advice: "私情を挟まず、事実と誠実さを基準にしてバランスの良い決断を下してください。" },
+        reversed: { keywords: "偏見・不公正・優柔不断・一方的な裁き・罪悪感", detail: "どちらか一方に偏った判断をしてしまったり、事実を歪めて見ている可能性があります。アンバランスを見直して。", advice: "自分に嘘をついていないか、もう一度公平でフラットな視点から全体を見直してください。" },
+        yesno: "MAYBE（客観的な判断次第）"
       },
       {
-        id: "maj_12", file: "12.jpg", type: "major", suitName: "大アルカナ", num: "XII", name: "吊るされた男",
-        upright: { keywords: "自己犠牲・視点の転換・忍耐・覚醒", detail: "身動きは取れませんが、それゆえにこれまで見えなかった真実や新しい発想が得られます。耐える価値のある試練です。", advice: "現状を逆の視点から捉え直してください。動けない時にこそ内面の成長があります。" },
-        reversed: { keywords: "無駄な我慢・報われない抵抗・徒労", detail: "苦労そのものが目的化してしまい、無意味な我慢に縛り付けられています。自ら鎖を解く勇気が必要です。", advice: "見返りのない無理な犠牲をやめ、自分を解放する道を選びましょう。" },
-        yesno: "NO（今は動かず静観）"
+        id: "maj_12", file: "12.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XII", name: "吊るされた男",
+        upright: { keywords: "自己犠牲・視点の転換・忍耐・精神的覚醒・受容", detail: "物質的な行動が制限される代わりに、これまで見えなかった真実が開ける悟りの時間です。現状を受け入れることで大成長します。", advice: "物事を逆の視点から眺めてみてください。一見不自由に思える状況の中に最大の打開策があります。" },
+        reversed: { keywords: "徒労・無駄な我慢・報われない抵抗・身動き不能", detail: "我慢すること自体が目的になってしまい、不毛な状況に自ら縛り付けられているサインです。", advice: "意味のない我慢を手放し、自ら自由になるための別の選択肢を探してください。" },
+        yesno: "NO（今は動かず耐える時）"
       },
       {
-        id: "maj_13", file: "13.jpg", type: "major", suitName: "大アルカナ", num: "XIII", name: "死神",
-        upright: { keywords: "劇的な終焉・再生・手放し・再スタート", detail: "役目を終えた状況が終わりを告げ、新たな章が始まります。恐れず過去を手放すことで、鮮やかな再生が訪れます。", advice: "終わったものに感謝して綺麗に手放し、新しい未来を受け入れましょう。" },
-        reversed: { keywords: "未練・執着・変化への恐れ・膠着状態", detail: "過去の栄光や関係に未練を残し、変化を恐れてしがみついています。引き延ばすほど苦しくなります。", advice: "変化を怖がらず、古い執着を断ち切る覚悟を決めてください。" },
-        yesno: "NO（古いものを清算する時）"
+        id: "maj_13", file: "13.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XIII", name: "死神",
+        upright: { keywords: "再生・劇的な終焉・不要なものの手放し・リセット", detail: "役目を終えたサイクルが完全に幕を閉じ、新しい章が始まります。執着を手放すことで真新しい光が差し込みます。", advice: "終わるべきものに感謝して手放し、新しい始まりのためのスペースを空けましょう。" },
+        reversed: { keywords: "執着・未練・過去の引きずり・膠着・変化の恐れ", detail: "終わらせるべきだと頭では分かっているのに、変化が怖くて過去にしがみついてしまっている状態です。", advice: "変化を恐れず、過去に未練を残すのをやめて前を向く勇気を持ってください。" },
+        yesno: "NO（古いものを捨てるべき時）"
       },
       {
-        id: "maj_14", file: "14.jpg", type: "major", suitName: "大アルカナ", num: "XIV", name: "節制",
-        upright: { keywords: "調和・バランス・穏やかな循環・中庸", detail: "異なる要素が美しく混ざり合い、無理のない穏やかな循環が生まれています。心身ともに健康で調和が取れる時です。", advice: "極端に走らず、中庸を保ちながら周囲と穏やかな歩調を合わせましょう。" },
-        reversed: { keywords: "不調和・不摂生・極端・感情の乱れ", detail: "生活リズムや感情のバランスが崩れ、周囲との歯車が狂いがちです。無理なスケジュールを点検しましょう。", advice: "過度な欲や暴飲暴食を控え、心身のメンテナンスを優先してください。" },
+        id: "maj_14", file: "14.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XIV", name: "節制",
+        upright: { keywords: "調和・バランス・自然な融合・穏やかな循環・中庸", detail: "異なる要素が美しく混ざり合い、穏やかな循環が生まれています。中庸を保つことで心身のバランスが整います。", advice: "何事も『ほどほど』のバランスを意識し、相手と穏やかな歩調を合わせて進みましょう。" },
+        reversed: { keywords: "不摂生・極端・浪費・不調和・感情の乱れ", detail: "生活リズムや感情のバランスが崩れたり、極端な言動で周囲との調和を乱している可能性があります。", advice: "過度な欲や無理を控え、心身の休養と生活リズムの調整を最優先にしてください。" },
         yesno: "YES（穏やかに進展する）"
       },
       {
-        id: "maj_15", file: "15.jpg", type: "major", suitName: "大アルカナ", num: "XV", name: "悪魔",
-        upright: { keywords: "執着・欲望・甘い誘惑・束縛・共依存", detail: "目先の快楽や強い執着に囚われ、自由を奪われている状態です。鎖を外す鍵は、あなた自身の自立心にあります。", advice: "自分を縛っている本当の原因が自身の甘えであることを直視しましょう。" },
-        reversed: { keywords: "悪縁の解消・覚醒・束縛からの脱出・自立", detail: "不健全な関係や悪習慣の呪縛から抜け出せる絶好の機会です。目が覚めるように清々しい自由を取り戻せます。", advice: "断ち切るべきしがらみを思い切って手放し、本来の自分を取り戻しましょう。" },
-        yesno: "NO（甘い誘惑に要注意）"
+        id: "maj_15", file: "15.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XV", name: "悪魔",
+        upright: { keywords: "執着・欲望・束縛・甘い誘惑・共依存", detail: "目先の快楽や強いこだわり、他者への執着に心が囚われている状態です。鎖は自らの意志で外すことができます。", advice: "自分を縛っている本当の原因が『自分の甘えや恐れ』であることを直視しましょう。" },
+        reversed: { keywords: "悪縁の解消・覚醒・束縛からの脱出・自立・再生", detail: "長年縛られていた呪縛や悪習慣から抜け出す絶好の好機です。自分軸を取り戻して清々しい自由へと歩み出せます。", advice: "しがらみや不要なプライドを思い切って断ち切り、本来の自由な自分へ戻りましょう。" },
+        yesno: "NO（甘い誘惑に注意）"
       },
       {
-        id: "maj_16", file: "16.jpg", type: "major", suitName: "大アルカナ", num: "XVI", name: "塔",
-        upright: { keywords: "電撃的崩壊・真実の露呈・急変・覚醒", detail: "脆い基盤の上に築かれたものが突然崩れ去る激動の暗示。ショックは大きいですが、幻想から目覚める神聖なリセットです。", advice: "崩壊に抗わず、ゼロから本物の土台を作り直す決意を固めてください。" },
-        reversed: { keywords: "危機回避・小康状態・徐々に進む再建", detail: "致命傷は免れたものの、抜本的な改善が求められています。問題を先送りせず、弱点を真摯に修復する時です。", advice: "嵐の後の片付けを怠らず、根本的な原因を一つずつ丁寧に解決しましょう。" },
-        yesno: "NO（抜本的な見直しが必須）"
+        id: "maj_16", file: "16.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XVI", name: "塔",
+        upright: { keywords: "急変・価値観の崩壊・予期せぬ衝撃・覚醒・真実の発覚", detail: "偽りの土台の上に築かれたものが突然崩れ去る激動の暗示。本物の真実の上に人生を築き直すための神聖なリセットです。", advice: "崩壊に抗ってしがみつくのをやめ、ゼロから強固な基盤を作り直す覚悟を決めましょう。" },
+        reversed: { keywords: "危機回避・被害の最小化・徐々に進む改革・再建", detail: "最悪の決定打は免れたものの、根本的な原因の解消が求められています。弱点だった部分を真摯に修復していきましょう。", advice: "嵐の後の片付けを怠らず、根本的な原因を一つずつ丁寧に改善してください。" },
+        yesno: "NO（抜本的な見直しが必要）"
       },
       {
-        id: "maj_17", file: "17.jpg", type: "major", suitName: "大アルカナ", num: "XVII", name: "星",
-        upright: { keywords: "希望・閃き・明るい見通し・純粋な祈り", detail: "暗闇を抜けて輝く希望の星が現れます。純粋な夢や直感を信じることで、明るく温かい未来が引き寄せられます。", advice: "疑う心を手放し、自分の可能性と未来の希望をまっすぐに信じましょう。" },
-        reversed: { keywords: "失望・高すぎる理想・見通しの甘さ", detail: "理想が高すぎて現実とのギャップに落ち込んだり、見通しが甘くて挫折感を味わう恐れがあります。", advice: "非現実的な期待を捨て、足元の手の届く小さな一歩を大切にしてください。" },
-        yesno: "YES（希望が叶うサイン）"
+        id: "maj_17", file: "17.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XVII", name: "星",
+        upright: { keywords: "希望・ひらめき・明るい見通し・心の平穏・純粋な願い", detail: "暗闇を抜けて希望の星が輝き出します。心の奥底にある純粋な夢や直感を信じることで、温かい未来が引き寄せられます。", advice: "無理な背伸びを手放し、ありのままの自分と未来の可能性を信じて希望を抱いてください。" },
+        reversed: { keywords: "失望・高すぎる理想・見通しの甘さ・悲観的・自信喪失", detail: "理想が高すぎて現実とのギャップに落ち込んだり、ネガティブな想像で勝手に諦めてしまっているサインです。", advice: "悲観的にならず、目の前にある手の届く確かな一歩を大切に積み重ねてください。" },
+        yesno: "YES（希望が叶う兆し）"
       },
       {
-        id: "maj_18", file: "18.jpg", type: "major", suitName: "大アルカナ", num: "XVIII", name: "月",
-        upright: { keywords: "不安・曖昧・胸騒ぎ・潜在意識の迷い", detail: "先が見通せず、霧の中を手探りで歩くような漠然とした不安を抱きやすい時期です。重大な決断は避けましょう。", advice: "不安に煽られて早合点せず、状況がはっきりするまで静かに様子を見ましょう。" },
-        reversed: { keywords: "霧が晴れる・不安の解消・真相の発覚", detail: "迷いの霧が晴れ、事態の全貌や相手の本音が見えてきます。恐れから解放されて前進できる兆しです。", advice: "明かされた事実を冷静に受け止め、次のステップへ歩み出してください。" },
-        yesno: "NO（警戒と見極めが必要）"
+        id: "maj_18", file: "18.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XVIII", name: "月",
+        upright: { keywords: "不安・曖昧・迷い・胸騒ぎ・潜在意識の揺らぎ", detail: "先の見通しが立たず、漠然とした不安を感じやすい時です。思い込みで自爆しないよう、今は重大な決断を避けましょう。", advice: "不安を無理に打ち消そうとせず、今は事実だけを見つめて静かに様子を見てください。" },
+        reversed: { keywords: "霧が晴れる・不安の解消・真相の判明・夜明け", detail: "迷いの霧が晴れ、事態の真相や相手の本心が見えてきます。前進するための道筋がクリアに浮かび上がってきます。", advice: "恐れずに現実を見つめ、明らかになった事実をもとに次のステップへ踏み出しましょう。" },
+        yesno: "NO（警戒と確認が必要）"
       },
       {
-        id: "maj_19", file: "19.jpg", type: "major", suitName: "大アルカナ", num: "XIX", name: "太陽",
-        upright: { keywords: "成功・祝福・歓喜・生命力・明朗", detail: "黄金の光に照らされ、すべてが明るく輝く至高の運気です。無邪気な笑顔と自信が周囲を惹きつけ大成功を収めます。", advice: "オープンで明るい姿勢を貫き、堂々と自分の魅力を発信してください。" },
-        reversed: { keywords: "熱意の低下・一時的曇り・過信・怠慢", detail: "決定的な失敗ではありませんが、熱意が冷めたり油断からミスをしやすい時です。謙虚さを保てば大丈夫です。", advice: "焦って結果を求めず、エネルギーを満タンに回復させてから再進しましょう。" },
-        yesno: "YES（輝かしい成就）"
+        id: "maj_19", file: "19.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XIX", name: "太陽",
+        upright: { keywords: "成功・祝福・生命力・幸福・純粋な歓喜・明朗", detail: "黄金の光に照らされ、すべてが明るく輝く最高の運気です。隠し事のない純粋な笑顔と活力が溢れ、愛と喜びに満たされます。", advice: "自分を包み隠さず、素直な笑顔と情熱を前面に出して堂々と進んでください。" },
+        reversed: { keywords: "熱意の低下・一時的な不調・見栄・自惚れ・不完全燃焼", detail: "完全な失敗ではありませんが、太陽が雲に隠れたように元気が切れていたり、過信による油断が生じやすい時です。", advice: "焦って結果を急がず、心身のエネルギーを満タンに回復させてから再スタートしましょう。" },
+        yesno: "YES（輝かしい成功）"
       },
       {
-        id: "maj_20", file: "20.jpg", type: "major", suitName: "大アルカナ", num: "XX", name: "審判",
-        upright: { keywords: "復活・覚醒・再起・吉報・過去の報い", detail: "諦めかけていた願いが再び息を吹き返し、過去の努力が正当に報われる奇跡の時です。再起のラッパが鳴り響きます。", advice: "届いたチャンスに迷わず応答し、過去の経験を胸に堂々と立ち上がりましょう。" },
-        reversed: { keywords: "後悔・未練・再起の躊躇・自己否定", detail: "過去の失敗を引きずり、目の前のチャンスに踏み出せないでいます。過去は変えられません。", advice: "後悔を断ち切り、今できる再挑戦に全力を傾けてください。" },
-        yesno: "YES（復活の好機到来）"
+        id: "maj_20", file: "20.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XX", name: "審判",
+        upright: { keywords: "復活・覚醒・過去の清算・吉報・奇跡の再起", detail: "過去の努力や諦めかけていた願いが報われ、再び息を吹き返す奇跡のタイミングです。新しいステージへと引き上げられます。", advice: "過去を言い訳にせず、今届いている呼びかけや再挑戦のチャンスに素直に応えましょう。" },
+        reversed: { keywords: "後悔・未練・再起の躊躇・判断の先送り・自己否定", detail: "過去の失敗を悔やむばかりで、目の前にあるチャンスを逃してしまっている暗示です。区切りをつける勇気を。", advice: "自分を責めるのをやめ、これまでの経験すべてを成長の糧として前を向きましょう。" },
+        yesno: "YES（復活・再度の好機）"
       },
       {
-        id: "maj_21", file: "21.jpg", type: "major", suitName: "大アルカナ", num: "XXI", name: "世界",
-        upright: { keywords: "達成・完全・調和の極み・新ステージ", detail: "旅が完璧な形で完結し、最高の満足感に包まれます。これまでの努力が全て実を結び、次の次元への扉が開きます。", advice: "自らの歩みを誇りに思い、満たされた感謝の気持ちで今を味わいましょう。" },
-        reversed: { keywords: "未完成・中途半端・あと一歩の妥協", detail: "ゴール目前で気が緩んだり、妥協して中途半端に終わってしまう恐れがあります。最後の一押しが肝心です。", advice: "途中で投げ出さず、完璧を目指して最後まで丁寧に取り組みましょう。" },
-        yesno: "YES（完全なる成功）"
+        id: "maj_21", file: "21.jpg", type: "major", suit: "major", suitName: "大アルカナ", num: "XXI", name: "世界",
+        upright: { keywords: "達成・完全・最高の結末・調和の極み・新ステージ", detail: "一つの大きな旅が最高の形で完結しました。完全な調和と満たされた幸福感の中で、次の世界への扉が開かれます。", advice: "これまでの歩みを誇りに思い、満たされた感謝の気持ちで今を味わい尽くしてください。" },
+        reversed: { keywords: "未完成・中途半端・あと一歩の妥協・停滞・マンネリ", detail: "ほぼゴールに近い状態ですが、最後のツメが甘かったり、妥協して中途半端に終わらせてしまう恐れがあります。", advice: "妥協して終わらせず、あと一歩の努力を惜しまずにやり遂げてください。" },
+        yesno: "YES（最善の成就）"
       },
 
       /* --- 小アルカナ：ワンド (Wands 14枚: w01.jpg 〜 w14.jpg) --- */
       {
         id: "w_01", file: "w01.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "Ace", name: "ワンドのエース",
-        upright: { keywords: "情熱の始まり・閃き・意欲・創造の種", detail: "燃えるような情熱とやる気が湧き上がる好機です。新たな挑戦やプロジェクトをスタートさせる最高の力があります。", advice: "思いついたアイデアを行動に移し、情熱の火を大きく育てましょう。" },
-        reversed: { keywords: "情熱の空回り・出鼻をくじかれる・やる気の低下", detail: "最初の一歩で挫折したり、やる気が空回りして消えてしまう暗示です。動機を再確認しましょう。", advice: "無理に力まず、本当にやりたいことなのか根本的な情熱を見つめ直してください。" },
-        yesno: "YES（情熱を持ってスタートせよ）"
+        upright: { keywords: "情熱の芽生え・強い意欲・新しい挑戦・インスピレーション", detail: "力強い創造の炎が灯りました。直感的にやりたいことが湧き上がり、情熱的に第一歩を踏み出せる最高のタイミングです。", advice: "損得を考えすぎず、内側から湧き出るワクワクと初期衝動を信じてスタートしましょう。" },
+        reversed: { keywords: "空回り・情熱の空洞化・焦燥・出鼻をくじかれる", detail: "やる気ばかりが空回りして形にならなかったり、情熱が急激に冷めてしまう暗示です。無理に進めず火種を温めて。", advice: "焦ってスタートを切らず、自分が本当に熱くなれる原点を再確認してください。" },
+        yesno: "YES（情熱に従うべき）"
       },
       {
         id: "w_02", file: "w02.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "2", name: "ワンドの2",
-        upright: { keywords: "大志・計画・未来の展望・世界への視野", detail: "手元の成功に満足せず、さらに広い世界を見据えて長期的な展望を立てる時です。未来への確かな手応えがあります。", advice: "視野を世界へ広げ、次の大きな目標に向けた計画を綿密に練りましょう。" },
-        reversed: { keywords: "足踏み・恐れ・優柔不断・計画倒れ", detail: "未知の世界へ踏み出すのが怖くて現状維持に甘んじています。迷っているうちに好機を逃さないように。", advice: "恐れを手放し、一歩外へ踏み出す覚悟を決めてください。" },
-        yesno: "YES（前向きな計画）"
+        upright: { keywords: "広い視野・将来の展望・次なる野望・海外・計画", detail: "城壁から地球儀を見つめ、次なる大きな舞台へと思いを馳せています。基盤が整い、さらなる高みへ挑戦する準備期です。", advice: "手元の小さな世界に満足せず、半年〜数年先の大きなスケールで計画を練りましょう。" },
+        reversed: { keywords: "現状への足踏み・未知への恐れ・計画の狂い・内弁慶", detail: "新しい一歩を踏み出すのが怖くて、居心地のいい場所に留まり続けています。変化を恐れるあまり視野が狭窄気味です。", advice: "安全地帯から一歩外へ出る勇気を持ってください。小さな挑戦が扉を開きます。" },
+        yesno: "YES（広い視野での挑戦）"
       },
       {
         id: "w_03", file: "w03.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "3", name: "ワンドの3",
-        upright: { keywords: "発展・協力・手応え・順調な航海", detail: "放った船が順調に進み、確かな手応えと協力者が現れる発展のサインです。さらなる飛躍が期待できます。", advice: "仲間と連携を取りながら、自信を持って更なる高みを目指しましょう。" },
-        reversed: { keywords: "遅延・協力不足・見通しの甘さ・停滞", detail: "予定通りに船が進まず、連携の乱れから遅延が発生しがちです。見通しを再点検しましょう。", advice: "協力者との情報共有を密にし、無理のないスケジュールに調整してください。" },
-        yesno: "YES（順調な発展）"
+        upright: { keywords: "順調な進展・手応え・協力関係・航路の確立・発展", detail: "送り出した船が成果を運んでくるのを待つ確信の時。これまでのアプローチが正しかった手応えが得られ、世界が広がります。", advice: "自分の進んでいる道を信じ、協力者とともにさらに遠くの目標を目指しましょう。" },
+        reversed: { keywords: "見込み違い・連携ミス・期待外れ・進展の遅延", detail: "期待していた成果が遅れたり、パートナーとの歩調が合わずにやきもきする暗示です。過度な期待は一度手放しましょう。", advice: "他力本願をやめ、状況を定期的に点検しながら着実な連絡を取り合いましょう。" },
+        yesno: "YES（大いなる発展）"
       },
       {
         id: "w_04", file: "w04.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "4", name: "ワンドの4",
-        upright: { keywords: "祝祭・休息・安定した居場所・歓迎", detail: "一つの節目を迎え、安らげる場所で喜びを分かち合える平和な時期です。家庭やチームの絆が深まります。", advice: "ここまでの成果を祝い、大切な仲間と心穏やかな時間を分かち合いましょう。" },
-        reversed: { keywords: "一時的な落ち着きのなさ・不調和・小さな軋轢", detail: "完全な破綻ではありませんが、安心できるはずの場で小さな気まずさやすれ違いが生じやすい時です。", advice: "感謝の気持ちを言葉で伝え、温かい雰囲気づくりを意識してください。" },
-        yesno: "YES（心温まる調和）"
+        upright: { keywords: "祝福・安心・休息の場・家庭円満・平和・祝祭", detail: "花輪で飾られた門の下で喜びに満ちた乾杯が交わされます。一つの節目を無事に迎え、心休まる安らぎの時間を享受できます。", advice: "張り詰めた糸を緩め、身近な仲間や家族と達成の喜びを分かち合いましょう。" },
+        reversed: { keywords: "一時的な緊張・くつろげない環境・小さな不和", detail: "本来なら喜ぶべき場面なのに心が落ち着かなかったり、身近な人間関係で小さな遠慮やすれ違いが生じがちです。", advice: "周囲に気を遣いすぎず、自分自身がリラックスできる居場所を整えてください。" },
+        yesno: "YES（心温まる結末）"
       },
       {
         id: "w_05", file: "w05.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "5", name: "ワンドの5",
-        upright: { keywords: "切磋琢磨・競争・葛藤・意見のぶつかり合い", detail: "互いに主張をぶつけ合い、熱気ある議論や健全な競争が起きる時です。この摩擦が成長の起爆剤になります。", advice: "衝突を恐れず、本音で意見を交わして互いを高め合いましょう。" },
-        reversed: { keywords: "不毛な争い・内輪揉め・疲弊・ストレス", detail: "建設的でない足の引っ張り合いや、感情的な対立で疲弊する恐れがあります。無用な争いから身を引きましょう。", advice: "勝ち負けに拘るのをやめ、冷静に共通の落としどころを探してください。" },
-        yesno: "NO（争いを避けるべき）"
+        upright: { keywords: "切磋琢磨・健全な議論・競争・試行錯誤・活発な意見", detail: "若者たちが杖を交えて競い合っています。敵対ではなく、互いを高め合うための有意義なぶつかり合いです。", advice: "衝突を恐れず、自分の意見を堂々と主張して本音でぶつかり合いましょう。" },
+        reversed: { keywords: "不毛な争い・内紛・エネルギーの消耗・妥協・疲労", detail: "建設的でない言い争いや意地の張り合いで体力を削られています。無意味なマウント合戦からは距離を置きましょう。", advice: "勝ち負けに拘るのをやめ、冷静に対話できる場へと一度仕切り直してください。" },
+        yesno: "MAYBE（切磋琢磨が必要）"
       },
       {
-        id: "w_06", file: "w06.jpg", type: "minor", suitName: "ワンド", num: "6", name: "ワンドの6",
-        upright: { keywords: "凱旋・勝利・称賛・注目の的・達成", detail: "努力が実り、多くの人々から称賛と支持を集めて華々しく勝利を収める時です。自信に満ちた前進が続きます。", advice: "勝利を素直に誇り、支えてくれた周囲への感謝を忘れずに前進しましょう。" },
-        reversed: { keywords: "過信・自惚れ・期待外れ・遅れる成功", detail: "賞賛に浮かれて油断したり、期待していたほどの評価が得られず落ち込む暗示です。謙虚さを保ちましょう。", advice: "見栄を張らず、足元の実力向上に再び集中してください。" },
+        id: "w_06", file: "w06.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "6", name: "ワンドの6",
+        upright: { keywords: "凱旋・勝利・称賛・周囲からの高評価・自信", detail: "月桂冠を掲げた騎士が拍手喝采の中を進みます。あなたの努力が公に認められ、リーダーシップと勝利を手中に収めます。", advice: "堂々と胸を張って成果を受け取り、周囲への感謝を伝えることで支持を固めましょう。" },
+        reversed: { keywords: "自惚れ・期待外れ・評価の横取り・自信喪失・落選", detail: "慢心から油断が生じたり、期待していたほどの評価が得られずに落胆する暗示です。見栄を張ると墓穴を掘ります。", advice: "謙虚さを取り戻し、周囲のおかげで成果が出せていることを思い出してください。" },
         yesno: "YES（誇らしい勝利）"
       },
       {
         id: "w_07", file: "w07.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "7", name: "ワンドの7",
-        upright: { keywords: "優位な立場・奮闘・信念の防衛・粘り勝ち", detail: "複数のプレッシャーに囲まれていますが、あなたは有利な位置にいます。信念を曲げずに踏ん張れば守り抜けます。", advice: "弱気にならず、自分のポジションと正当性を堂々と主張し抜いてください。" },
-        reversed: { keywords: "圧倒される・守勢・力尽きる・孤立無援", detail: "次々と押し寄せる要求や批判に圧倒され、守りきれなくなる恐れがあります。一人で抱え込まないで。", advice: "無理に一人で戦わず、優先順位をつけて不要な戦いは手放しましょう。" },
-        yesno: "YES（踏ん張りどころ）"
+        upright: { keywords: "有利な防衛・孤軍奮闘・信念の死守・優位性の維持", detail: "高台に立ち、下から迫る挑戦者たちを巧みに退けています。多勢に無勢でも、あなたの有利な立場と信念は揺らぎません。", advice: "弱気にならず強気の姿勢を貫いてください。あなたの立場は十分に優位です。" },
+        reversed: { keywords: "守勢の限界・四面楚歌・プレッシャー・防戦一方", detail: "次から次へと押し寄せる要求や批判に圧倒され、耐えきれなくなっています。一人で抱え込むのは限界です。", advice: "すべてを一人で引き受けるのをやめ、優先順位をつけて一部を手放しましょう。" },
+        yesno: "YES（信念を守り通せる）"
       },
       {
         id: "w_08", file: "w08.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "8", name: "ワンドの8",
-        upright: { keywords: "急展開・スピード・迅速な伝達・吉報", detail: "事態が猛スピードで動き出します。滞っていた物事が一気に進展し、予期せぬ吉報や朗報が飛び込んできます。", advice: "スピード感が命です。迷わず即座にリアクションを返しましょう。" },
-        reversed: { keywords: "遅延・混乱・空回り・焦燥感", detail: "情報が錯綜してパニックになったり、予期せぬ邪魔が入って展開が遅れる暗示です。慌てるとミスを呼びます。", advice: "焦ってバタバタせず、事実関係を落ち着いて一つずつ確認してください。" },
-        yesno: "YES（迅速な好転）"
+        upright: { keywords: "急展開・スピード・好転の知らせ・電撃的な進展", detail: "大空を8本の杖が一斉に飛翔しています。状況が目まぐるしい速さで動き出し、待ち望んでいた連絡やチャンスが舞い込みます。", advice: "迷っている暇はありません。反射神経を研ぎ澄まし、即断即決で波に乗りましょう。" },
+        reversed: { keywords: "遅延・通信トラブル・焦りによるミス・キャンセル", detail: "急激な流れに追いつけずパニックになったり、連絡の行き違いで足並みが乱れる暗示です。確認を怠らないで。", advice: "スピードを落として事実確認を徹底し、行き違いがないか再点検してください。" },
+        yesno: "YES（急速な展開）"
       },
       {
         id: "w_09", file: "w09.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "9", name: "ワンドの9",
-        upright: { keywords: "警戒・備え・最後の防衛・不屈の粘り", detail: "過去の傷を抱えながらも、万全の警戒態勢を整えて最後の砦を守っています。準備を怠らなければ大丈夫です。", advice: "油断せず備えを万全にし、最後まで諦めずに持ち場を守りましょう。" },
-        reversed: { keywords: "猜疑心・疲労困憊・過剰な防衛・油断", detail: "警戒心が強すぎて周囲を信じられなくなっていたり、疲れ果てて防御が崩れかけています。休養が必要です。", advice: "過剰な疑い心を手放し、まずは十分な睡眠をとって気力を回復させましょう。" },
-        yesno: "MAYBE（慎重な警戒が必要）"
+        upright: { keywords: "警戒・万全の備え・粘り強さ・最後の砦・防衛態勢", detail: "傷つきながらも杖を握りしめ、最後の防衛ラインを守っています。過去の経験を活かした用心深さが危機を防ぎます。", advice: "油断せず最後までガードを固めてください。これまでの備えがあなたを守ります。" },
+        reversed: { keywords: "過剰な猜疑心・疲労困憊・頑なな警戒・孤立", detail: "警戒心が強すぎて誰も信じられなくなっていたり、張り詰めすぎて心が折れそうです。敵ばかりではありません。", advice: "肩の力を少し抜き、信頼できる相手には心を開いて休養を取りましょう。" },
+        yesno: "MAYBE（油断大敵）"
       },
       {
         id: "w_10", file: "w10.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "10", name: "ワンドの10",
-        upright: { keywords: "重圧・過負荷・抱え込み・ゴール間近の奮闘", detail: "多くの責任や仕事を一人で背負い込み、限界に達しています。ゴールは見えているので負担の軽減を。", advice: "人に任せられるものは分担し、無理な抱え込みを手放してください。" },
-        reversed: { keywords: "重圧からの解放・崩壊・投げ出し・燃え尽き", detail: "重荷に耐えかねて途中で投げ出してしまうか、逆に義務感から解放されてスッキリできるかの分かれ目です。", advice: "限界が来る前に『NO』と言い、不要な責任を潔く下ろしましょう。" },
-        yesno: "NO（過剰な負担に注意）"
+        upright: { keywords: "重圧・過負荷・責任過多・抱え込み・ゴール間近", detail: "10本の重い杖を一人で抱えて街へ向かっています。限界に近い負担ですが、目的地はもう目の前です。", advice: "一人で背負いすぎです。他人に任せられるタスクはすぐに割り振ってください。" },
+        reversed: { keywords: "プレッシャーからの解放・荷下ろし・ギブアップ・挫折", detail: "重荷に耐えかねて投げ出してしまうか、逆に賢く荷物を手放して軽やかさを取り戻す転換点です。", advice: "本当に背負うべきものだけを残し、不要な責任や見栄は綺麗に下ろしましょう。" },
+        yesno: "NO（重荷を手放すべき）"
       },
       {
         id: "w_11", file: "w11.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "Page", name: "ワンドのペイジ",
-        upright: { keywords: "好奇心・熱心な伝達・新しい情報・冒険心", detail: "情熱に満ちた好奇心とフレッシュな意欲にあふれる若々しいエネルギー。新しい刺激的な知らせが届きます。", advice: "未知のことにも臆せず首を突っ込み、ワクワクする好奇心を大切にしましょう。" },
-        reversed: { keywords: "落ち着きのなさ・軽薄・優柔不断・悪口", detail: "思いつきばかりで実行が伴わなかったり、不誠実な噂話に振り回される暗示です。地に足をつけましょう。", advice: "口先だけでなく、言ったことを最後までやり遂げる誠実さを持ってください。" },
+        upright: { keywords: "冒険心・吉報・情熱的な探求・好奇心旺盛な使者", detail: "若々しい情熱と好奇心に満ち、新しいアイデアや未知の挑戦に胸を躍らせています。心躍る知らせが届く予兆です。", advice: "無邪気な好奇心を大切にし、面白そうな誘いには即座に手を挙げてみましょう。" },
+        reversed: { keywords: "熱しやすく冷めやすい・軽薄・口先だけ・悪態", detail: "最初は威勢がいいのにすぐに飽きて投げ出したり、無責任な言動で周囲を振り回してしまう恐れがあります。", advice: "思いつきで周囲を巻き込まず、始めたことは最後までやり遂げる責任感を持ちましょう。" },
         yesno: "YES（前向きな朗報）"
       },
       {
         id: "w_12", file: "w12.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "Knight", name: "ワンドのナイト",
-        upright: { keywords: "突進・情熱的な行動力・勇敢・冒険", detail: "恐れを知らぬ情熱で獲物に向かって一直線に駆け抜けます。エネルギッシュな行動が状況を劇的に動かします。", advice: "迷わず情熱のままに突っ走ってください。行動力そのものが最大の武器です。" },
-        reversed: { keywords: "短気・暴走・喧嘩っ早い・三日坊主", detail: "怒りっぽく攻撃的になったり、勢いだけで始めてすぐに飽きてしまう傾向があります。自制心を保ちましょう。", advice: "感情的な衝突を避け、長期的な持続力を意識してペースを整えてください。" },
-        yesno: "YES（果敢に攻めよ）"
+        upright: { keywords: "果敢な突進・情熱的行動力・スピード・旅立ち・冒険", detail: "燃え盛る情熱を胸に、馬を駆って新天地へ飛び出します。圧倒的な推進力とバイタリティで状況を力強くリードします。", advice: "迷わずアクセル全開で突き進んでください。あなたの熱量が周囲を動かします。" },
+        reversed: { keywords: "短気・暴走・喧嘩っ早さ・無責任な逃避・中途半端", detail: "熱くなりすぎて周囲と衝突したり、飽きると急に投げ出して別のところへ逃げてしまう悪癖の警告です。", advice: "カッとならずにクールダウンし、周囲のペースにも配慮して歩調を合わせましょう。" },
+        yesno: "YES（力強く突き進め）"
       },
       {
         id: "w_13", file: "w13.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "Queen", name: "ワンドのクイーン",
-        upright: { keywords: "快活・魅力・温かい情熱・カリスマ・自立", detail: "明るく温かいオーラで周囲を照らし、誰もが惹きつけられる魅力的なリーダーシップを発揮できる時です。", advice: "太陽のような笑顔と自信を持ち、周囲をポジティブに鼓舞していきましょう。" },
-        reversed: { keywords: "嫉妬・ヒステリック・支配的・自己中", detail: "プライドが高くなりすぎて周囲を支配しようとしたり、嫉妬深くなって人を傷つける恐れがあります。", advice: "他人の目を過剰に気にせず、寛大で温かな本来の包容力を取り戻してください。" },
-        yesno: "YES（自信を持って輝け）"
+        upright: { keywords: "明るさ・魅力・堂々とした自信・包容力・活気", detail: "ひまわりと黒猫を従えた魅力的な女王。太陽のように周囲を明るく照らし、自然体で人を惹きつける温かいオーラがあります。", advice: "自分を卑下せず、自信に満ちた笑顔と堂々とした振る舞いで場をリードしてください。" },
+        reversed: { keywords: "支配的・ヒステリック・嫉妬深さ・自己中心的・見栄", detail: "注目されないと不機嫌になったり、周囲を思い通りにコントロールしようとして反感を買うサインです。", advice: "他人の目を気にしすぎず、内面の穏やかさと寛大さを大切にしてください。" },
+        yesno: "YES（明るい魅力で成就）"
       },
       {
         id: "w_14", file: "w14.jpg", type: "minor", suit: "wands", suitName: "ワンド", num: "King", name: "ワンドのキング",
-        upright: { keywords: "リーダーシップ・情熱の統率・大志・決断力", detail: "確固たる情熱と揺るぎないリーダーシップで人々を導く頼もしい存在。大きな事業や挑戦を率いる器があります。", advice: "自信を持って先頭に立ち、周囲を力強く牽引していきましょう。" },
-        reversed: { keywords: "横暴・ワンマン・頑固・傲慢・過激", detail: "独裁的になり他人の意見を聞かなかったり、自分の熱量を一方的に押し付けて孤立する暗示です。", advice: "情熱の押し付けをやめ、相手のペースや立場を尊重する度量を見せてください。" },
-        yesno: "YES（リーダーシップが吉）"
+        upright: { keywords: "カリスマ・指導力・大胆な決断・情熱的リーダー", detail: "燃え盛る王座に座る堂々たる王。確固たるビジョンと強い意志で多くの人を導き、偉大なプロジェクトを成功へ導きます。", advice: "大局的な視野に立ち、確固たる自信を持ってチームや計画を力強く牽引しましょう。" },
+        reversed: { keywords: "ワンマン・傲慢・過激・独断専行・短気な支配", detail: "自分のやり方を押し付けて部下やパートナーを威圧していませんか？強権的な態度は孤立を招きます。", advice: "独善的にならず、仲間の意見にも耳を傾ける謙虚な器の大きさを示してください。" },
+        yesno: "YES（強いリーダーシップで吉）"
       },
 
       /* --- 小アルカナ：カップ (Cups 14枚: c01.jpg 〜 c14.jpg) --- */
       {
         id: "c_01", file: "c01.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "Ace", name: "カップのエース",
-        upright: { keywords: "あふれる愛・心の充足・共感・精神的始まり", detail: "器からあふれ出る豊かな愛情と幸福感。新しい恋や友情、純粋な感動に心が満たされる素晴らしい始まりです。", advice: "素直に愛と感謝を表現し、湧き上がる優しい感情を受け入れましょう。" },
-        reversed: { keywords: "愛情の枯渇・感情の乱れ・失望・閉ざされた心", detail: "心が満たされず虚しさを感じたり、感情が不安定になって周囲に不満をぶつけてしまうサインです。", advice: "他人に求める前に、まずは自分自身に優しく寄り添って満たしてあげましょう。" },
-        yesno: "YES（愛に満ちた幸運）"
+        upright: { keywords: "愛情の溢れ・共感・心の充足・新しい愛の始まり", detail: "聖なる杯から清らかな水がとめどなく溢れ出ています。深い愛や豊かな感性、心通い合う温かい人間関係の幕開けです。", advice: "心を素直に開き、湧き上がる純粋な優しさや好意をストレートに表現しましょう。" },
+        reversed: { keywords: "感情の枯渇・愛の空回り・過剰な感情移入・失望", detail: "心が満たされず寂しさを感じたり、一方通行の思いで疲弊しているサインです。まず自分を愛してあげて。", advice: "他人に愛を求めすぎるのをやめ、自分の傷ついた心をゆっくり癒やしましょう。" },
+        yesno: "YES（心満たされる始まり）"
       },
       {
         id: "c_02", file: "c02.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "2", name: "カップの2",
-        upright: { keywords: "相互理解・パートナーシップ・愛の誓い・調和", detail: "心と心が深く通じ合い、対等で温かい絆が結ばれます。恋愛、友情、ビジネスパートナーシップの好調期です。", advice: "本音で語り合い、相手への敬意と感謝をまっすぐに伝えましょう。" },
-        reversed: { keywords: "すれ違い・不調和・誤解・価値観の相違", detail: "小さな誤解やすれ違いから心の距離が開いてしまいがちです。意地を張らず歩み寄る努力を。", advice: "相手を責めるのではなく、自分の素直な気持ちを冷静に言葉にしてください。" },
-        yesno: "YES（相思相愛・深い絆）"
+        upright: { keywords: "心の絆・相思相愛・深いパートナーシップ・調和・対等", detail: "男女が杯を交わし、魂が引き合う美しい調和の瞬間です。恋愛、友情、ビジネスパートナーとしての最高の相性を示します。", advice: "相手の目を見て素直な本音を伝え、対等で温かい対話を重ねてください。" },
+        reversed: { keywords: "すれ違い・誤解・価値観の不一致・一時的な疎遠", detail: "小さな誤解や遠慮からコミュニケーションが滞り、心の距離が空いてしまっています。早めのフォローを。", advice: "意地を張らず、素直な言葉で相手への歩み寄りを自分から示しましょう。" },
+        yesno: "YES（素晴らしい相思相愛）"
       },
       {
         id: "c_03", file: "c03.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "3", name: "カップの3",
-        upright: { keywords: "祝福・仲間との喜び・乾杯・楽しい交流", detail: "親しい仲間と喜びを分かち合い、笑顔あふれる賑やかな祝宴の時。友情が深まり、楽しい交流に恵まれます。", advice: "気心の知れた仲間と集まり、互いの健闘を笑顔で称え合いましょう。" },
-        reversed: { keywords: "馴れ合い・過度の享楽・疎外感・散財", detail: "楽しさを通り越して不健康な馴れ合いになったり、グループ内で疎外感を感じてしまう暗示です。", advice: "流されるままの付き合いを見直し、適度な節度と距離感を保ちましょう。" },
-        yesno: "YES（楽しい祝福の輪）"
+        upright: { keywords: "喜びの共有・祝杯・仲間との結束・実りの祝宴", detail: "三人の乙女が杯を掲げて喜びを分かち合っています。コミュニティや友人関係に恵まれ、心弾む楽しい時間を過ごせます。", advice: "一人で抱え込まず、気心の知れた仲間とお祝いや楽しいおしゃべりを楽しみましょう。" },
+        reversed: { keywords: "内輪揉め・羽目の外しすぎ・表面的な付き合い・孤立", detail: "仲間内での噂話や派閥争いに巻き込まれたり、お酒や遊びに流されて散財する暗示です。線引きを。", advice: "表面的なノリに流されず、本当に信頼できる人との時間を選びましょう。" },
+        yesno: "YES（祝福と分かち合い）"
       },
       {
         id: "c_04", file: "c04.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "4", name: "カップの4",
-        upright: { keywords: "倦怠感・不満・内向・差し出された手の無視", detail: "現状に退屈や不満を感じて殻に閉じこもり、目の前に差し出されている新しいチャンスに気づいていません。", advice: "不満を数えるのをやめ、顔を上げて周りの小さな好意に目を向けましょう。" },
-        reversed: { keywords: "意欲の回復・新たな関心・殻を破る", detail: "退屈な鬱状態から抜け出し、新しい興味や出会いに心が動き始めます。前向きな変化のサインです。", advice: "新しく舞い込んできた誘いやアイデアに素直に乗ってみてください。" },
-        yesno: "MAYBE（見方を変えればチャンス）"
+        upright: { keywords: "不満・倦怠期・マンネリ・差し出された好機の無視", detail: "目の前に新しい杯が差し出されているのに、腕組みをして不満そうに下を向いています。現状への飽きと閉塞感です。", advice: "ないものねだりをやめ、すでに差し伸べられているチャンスに視野を広げましょう。" },
+        reversed: { keywords: "意欲の回復・新しい気づき・倦怠期の打破・前進", detail: "ふと顔を上げ、新しい可能性に気づいて行動を起こし始めます。退屈な日々から脱出する前向きなサインです。", advice: "差し出された新しい誘いやアイデアに素直に乗っかってみてください。" },
+        yesno: "NO（マンネリを打破すべき）"
       },
       {
         id: "c_05", file: "c05.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "5", name: "カップの5",
-        upright: { keywords: "喪失・後悔・悲しみ・残されたものへの盲目", detail: "倒れたカップ（失ったもの）ばかりを見つめて深く嘆いています。背後にはまだ満たされたカップが残っています。", advice: "失ったものを数えて悔やむのはやめ、今手元に残っている大切なものに感謝しましょう。" },
-        reversed: { keywords: "立ち直り・希望の再発見・過去の受容", detail: "深い悲しみの底を抜け、前を向いて歩き出す心の準備が整いました。新しい希望が見えてきます。", advice: "過去の痛みを糧として受け入れ、温かい未来へ視線を移してください。" },
-        yesno: "NO（悲しみを手放す時）"
+        upright: { keywords: "喪失感・後悔・悲しみ・残されたものへの盲点", detail: "倒れた3つの杯を見つめて黒いマントで嘆いています。しかし背後にはまだ2つの杯が無事に残っています。", advice: "失ったものを数えて悔やむのをやめ、手元に残された大切なものに目を向けましょう。" },
+        reversed: { keywords: "立ち直り・希望の再生・悲しみの克服・再出発", detail: "涙を拭って振り返り、残された希望に気づいて前を向きます。心の傷が癒え、再スタートを切る好機です。", advice: "過去を綺麗に清算し、新しい関係やチャンスに向かって顔を上げましょう。" },
+        yesno: "NO（過去を悔やむより前を向く）"
       },
       {
         id: "c_06", file: "c06.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "6", name: "カップの6",
-        upright: { keywords: "懐かしい思い出・純真・再会・過去からの贈り物", detail: "幼き日々の温かい記憶や、懐かしい人との再会。損得のない純粋な優しさが心を癒やしてくれます。", advice: "子どもの頃の純粋な夢を思い出し、素直で温かい気持ちで人に接しましょう。" },
-        reversed: { keywords: "過去への執着・ノスタルジーへの逃避・自立", detail: "昔は良かったと過去にすがりつき、現実の課題から目を背けている暗示です。大人としての前進を。", advice: "思い出の美化をやめ、今の現実と未来に向かって自立した一歩を踏み出してください。" },
-        yesno: "YES（心温まる再会・過去の好意）"
+        upright: { keywords: "ノスタルジー・懐かしい再会・純粋な思い出・無償の愛", detail: "昔ながらの庭で子供たちが花咲く杯を贈り合っています。幼少期の温かい記憶や、古くからの友人との再会が幸運を呼びます。", advice: "昔の思い出や初心を振り返り、打算のない純粋な気持ちを大切にしてください。" },
+        reversed: { keywords: "過去への囚われ・思い出依存・大人への脱皮・前進", detail: "「あの頃は良かった」と昔の栄光や思い出に縋り付いていませんか？過去の殻を破り、現実の未来へ進む時です。", advice: "過去のノスタルジーに区切りをつけ、今の年齢と立場で未来を築きましょう。" },
+        yesno: "YES（心温まる原点回帰）"
       },
       {
         id: "c_07", file: "c07.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "7", name: "カップの7",
-        upright: { keywords: "幻想・妄想・選択過多・非現実的な願望", detail: "雲の上に浮かぶ無数の夢や幻想に目を奪われ、現実の行動が伴っていません。実体のない幻惑に注意。", advice: "甘い夢物語から目を覚まし、実現可能な選択肢を一つに絞り込みましょう。" },
-        reversed: { keywords: "幻想からの目覚め・現実的決断・明瞭な目標", detail: "迷いの霧が晴れ、何が本物で何が幻影かを見極めることができます。具体的な目標が定まる好機です。", advice: "確信を持って現実的な一歩を選び取り、着実に実行へ移してください。" },
-        yesno: "NO（幻想に惑わされないで）"
+        upright: { keywords: "幻想・目移り・選択肢の過多・絵空事・迷い", detail: "雲の中に現れた無数の宝物に見とれて現実が見えなくなっています。夢を見るのは楽しいですが、行動が伴っていません。", advice: "あれこれ妄想を広げるのを一度止め、現実的に実行可能な一つに絞り込みましょう。" },
+        reversed: { keywords: "現実への覚醒・明確な選択・迷いの払拭・具体化", detail: "夢想の霧が晴れ、自分が本当に選ぶべき現実的な道がクリアに見えてきます。地に足の着いた決断ができます。", advice: "迷いを断ち切り、最も確実で具体的な選択肢にエネルギーを注ぎましょう。" },
+        yesno: "NO（現実的な選択に絞るべき）"
       },
       {
         id: "c_08", file: "c08.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "8", name: "カップの8",
-        upright: { keywords: "潔い旅立ち・執着の手放し・次のステージ・昇華", detail: "これまで積み上げてきたものに見切りをつけ、より高い精神的価値を求めて静かに立ち去る潔い決断の時です。", advice: "過去の成果にしがみつかず、胸を張って次の新しい旅へ出発しましょう。" },
-        reversed: { keywords: "諦めきれない・未練・居座り・目的の見失い", detail: "去るべき時が来ているのに未練からずるずると留まり、エネルギーを消耗しています。決断を。", advice: "もう潮時であることを素直に認め、新しい道を切り拓く勇気を持ってください。" },
-        yesno: "MAYBE（立ち去る勇気が吉）"
+        upright: { keywords: "次の旅立ち・手放し・価値観の転換・静かな離脱", detail: "これまで積み上げてきた8つの杯を残し、月明かりの下で山へと背を向けて立ち去ります。精神的な卒業の時です。", advice: "未練を手放し、今の自分にとって本当に魂が求める高みへと静かに歩き出しましょう。" },
+        reversed: { keywords: "未練・踏ん切りの悪さ・再挑戦・後戻り・迷い", detail: "去るべきだと分かっているのに過去の執着を断ち切れず、立ち止まってしまっています。勇気を持って決断を。", advice: "惰性で居続けるのをやめ、自分の成長のために新たな旅立ちを決断してください。" },
+        yesno: "YES（未練を手放し次へ）"
       },
       {
         id: "c_09", file: "c09.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "9", name: "カップの9",
-        upright: { keywords: "ウィッシュカード・願望成就・満足・個人的幸福", detail: "「願いが叶う」とされる幸運のカード。これまでの努力が実り、精神的・物質的な深い満足感に浸れます。", advice: "叶った幸せを素直に喜び、満ち足りた笑顔で周囲にも幸福を分け与えましょう。" },
-        reversed: { keywords: "自己満足・過剰な贅沢・空虚感・物質主義", detail: "表面的な贅沢や成功を手に入れたものの、心の奥底で虚しさを感じてしまう暗示です。精神的な充足を。", advice: "外見の自慢や過度な快楽を控え、心から通い合う真の豊かさを求めてください。" },
-        yesno: "YES（大いなる成就）"
+        upright: { keywords: "ウィッシュカード・願望成就・個人的満足・至福", detail: "9つの杯を背に満足そうに微笑む人物。「ウィッシュカード（願いが叶う）」と呼ばれ、物質的・精神的な大満足を示します。", advice: "願いが叶う最高のサインです。受け取る豊かさを心から喜んで受け取りましょう。" },
+        reversed: { keywords: "自惚れ・食べ過ぎ・自己満足・底の浅い贅沢・散財", detail: "自分の快楽ばかりを優先して傲慢になったり、過度の贅沢で健康や信用を損なう恐れがあります。感謝を忘れずに。", advice: "自分だけの満足に閉じこもらず、周囲への気遣いと謙虚さを大切にしてください。" },
+        yesno: "YES（願いは叶う）"
       },
       {
         id: "c_10", file: "c10.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "10", name: "カップの10",
-        upright: { keywords: "家族の幸福・永続する愛・平和・心の調和", detail: "虹の架かる空の下、家族や愛する人たちと永続的な幸福と平和を分かち合える至高のカードです。", advice: "身近な家族やパートナーに感謝を伝え、温かい家庭・チームを築きましょう。" },
-        reversed: { keywords: "家庭内の不和・価値観の対立・表面的な円満", detail: "家庭や親しいグループの中で摩擦やすれ違いが生じ、不満がくすぶっているサインです。対話を。", advice: "見て見ぬ振りをせず、家族や大切な人とじっくり膝を突き合わせて話し合いましょう。" },
-        yesno: "YES（至福の調和）"
+        upright: { keywords: "家族の幸福・永続する愛・平和・虹の祝福・満ち足りた絆", detail: "空にかかる虹の杯を家族が見上げ、子供たちが無心に踊っています。周囲全体が温かい愛と安らぎに包まれる大団円です。", advice: "身近な人たちとの絆を大切にし、穏やかで幸福な日常に心から感謝しましょう。" },
+        reversed: { keywords: "家庭の不和・表面的な平和・価値観の対立・すれ違い", detail: "外からは仲良く見えても、内側で不満やすれ違いが溜まっていませんか？形式だけでなく本音の対話が必要です。", advice: "体裁を取り繕うのをやめ、家族やパートナーと本音でじっくり話し合いましょう。" },
+        yesno: "YES（最高の幸福と調和）"
       },
       {
         id: "c_11", file: "c11.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "Page", name: "カップのペイジ",
-        upright: { keywords: "感性・優しい知らせ・素直な愛情・芸術的直感", detail: "純粋で瑞々しい感受性と優しい心。心温まる嬉しいメッセージや、感性を刺激する素敵な出会いが訪れます。", advice: "素直な気持ちを隠さず、詩情やアートを楽しむような柔らかい心で過ごしましょう。" },
-        reversed: { keywords: "傷つきやすさ・現実逃避・甘え・気まぐれ", detail: "感情の波に飲まれて傷つきやすくなったり、現実から逃げて妄想に耽ってしまう暗示です。自立を。", advice: "過度な甘えを手放し、自分の感情の機嫌は自分で取る自立心を意識してください。" },
-        yesno: "YES（優しい吉報）"
+        upright: { keywords: "純粋な心・直感・優しい知らせ・感受性・愛の芽生え", detail: "杯の中から顔を出した魚と対話する感受性豊かな若者。心温まるメッセージや、クリエイティブな閃きがもたらされます。", advice: "子供のような純真な感性を信じ、心に浮かんだ優しい言葉を素直に届けてください。" },
+        reversed: { keywords: "情緒不安定・甘え・現実逃避・傷つきやすさ・依存", detail: "些細なことで傷ついて引きこもったり、他人に依存して甘えすぎてしまう傾向があります。精神的な自立を。", advice: "感情の波に飲み込まれず、客観的な事実と自分の感情を切り離して捉えましょう。" },
+        yesno: "YES（心温まるインスピレーション）"
       },
       {
         id: "c_12", file: "c12.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "Knight", name: "カップのナイト",
-        upright: { keywords: "ロマンチック・優しい提案・誠実な愛・調停", detail: "白馬に乗った騎士が愛と平和の杯を届けてくれます。魅力的なオファーやロマンチックな進展が期待できます。", advice: "礼儀正しさと優しさを大切にし、美しい理想を持って誠実に行動しましょう。" },
-        reversed: { keywords: "不誠実・甘言・現実離れ・欺瞞・移り気", detail: "口先だけの甘い言葉で誘惑されたり、相手の理想ばかり高くて現実が伴わない恐れがあります。冷静に。", advice: "耳触りの良い言葉に惑わされず、相手の実際の行動と誠実さを見極めてください。" },
-        yesno: "YES（心温まる提案）"
+        upright: { keywords: "ロマンチスト・愛の告白・優しい提案・理想の追求", detail: "杯を掲げて穏やかに白馬を進める白馬の騎士。誠実な好意、プロポーズ、魅力的なオファーを運んでくる幸運の使者です。", advice: "理想を高く掲げ、優しさとロマンチックな真心を持って相手にアプローチしましょう。" },
+        reversed: { keywords: "口先だけの甘言・浮気心・優柔不断・現実離れの空想", detail: "甘い言葉で相手を翻弄したり、現実の責任から逃げて夢ばかり追ってしまう暗示です。甘い誘惑には警戒を。", advice: "口先だけの約束を避け、誠実な行動と言葉の一致を証明してください。" },
+        yesno: "YES（優しい提案に乗るべし）"
       },
       {
         id: "c_13", file: "c13.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "Queen", name: "カップのクイーン",
-        upright: { keywords: "深い共感・慈愛・直観力・母性的な温もり", detail: "海のように深い共感力と慈悲の心。相手の痛みを我がことのように理解し、優しく包み込む癒やしの存在です。", advice: "直感を信じ、困っている人に温かい手を差し伸べて癒やしの空間を作りましょう。" },
-        reversed: { keywords: "感情の氾濫・情緒不安定・依存・過敏", detail: "他人の感情に共鳴しすぎて疲れ果てたり、情緒不安定になって周囲を振り回してしまう恐れがあります。", advice: "自分と他人の境界線をしっかり引き、他人の問題に過剰に巻き込まれないようにしましょう。" },
-        yesno: "YES（深い共感と愛）"
+        upright: { keywords: "慈愛・深い共感力・豊かな直感・包容力・献身", detail: "美しく装飾された杯を見つめる愛情豊かな女王。他者の痛みを我が事のように感じ取る深い共感力と癒やしの力があります。", advice: "理屈で裁くのではなく、温かい母のような共感と優しさで相手を包み込んであげましょう。" },
+        reversed: { keywords: "感情の暴走・過度な依存・ヒステリー・共倒れ・被害妄想", detail: "他人の感情に振り回されて心がパンクしたり、相手を束縛して重たくなってしまっています。境界線を引いて。", advice: "他人の問題と自分の感情を切り離し、自分軸の心の静けさを取り戻してください。" },
+        yesno: "YES（愛と優しさで包む）"
       },
       {
         id: "c_14", file: "c14.jpg", type: "minor", suit: "cups", suitName: "カップ", num: "King", name: "カップのキング",
-        upright: { keywords: "感情の統御・包容力・寛大・精神的支柱", detail: "荒波の中でも乱れぬ穏やかな心。豊かな感情を理性の力でコントロールし、人々を温かく支える賢者です。", advice: "感情的にならず、広い心と寛大な態度で周囲の意見を受け止めて導きましょう。" },
-        reversed: { keywords: "気分のムラ・冷酷・感情の抑圧・不誠実", detail: "機嫌によって態度がコロコロ変わったり、冷淡になって周囲を困惑させるサインです。誠実さを。", advice: "ストレスを不機嫌な態度で発散せず、自分の感情を冷静に言葉で整理してください。" },
-        yesno: "YES（寛大な包容力）"
+        upright: { keywords: "寛大・感情の成熟・包容力ある指導者・穏やかな知恵", detail: "荒波の上に浮かぶ玉座に座りながらも、心は常に穏やか。深い人間理解と包容力で、周囲に安心感を与える大人の風格です。", advice: "どんな嵐の中でも冷静さを保ち、温かく寛大な心で周囲を支えましょう。" },
+        reversed: { keywords: "気分のムラ・不誠実・冷酷・感情の抑圧・不倫トラブル", detail: "感情をコントロールできずに不機嫌を撒き散らしたり、優しさを装って人を操ろうとする恐れがあります。", advice: "表面的な取り繕いをやめ、誠実で公正な大人の責任感を持って人と接してください。" },
+        yesno: "YES（寛大な対応が吉）"
       },
 
       /* --- 小アルカナ：ソード (Swords 14枚: s01.jpg 〜 s14.jpg) --- */
       {
         id: "s_01", file: "s01.jpg", type: "minor", suit: "swords", suitName: "ソード", num: "Ace", name: "ソードのエース",
-        upright: { keywords: "明晰な思考・決断・真実・困難の突破", detail: "鋭い知性と正義の剣で迷いを一刀両断する時です。曇りのない論理的な思考で、困難を力強く突破できます。", advice: "曖昧さを排し、真実と正義を信じて毅然とした決断を下しましょう。" },
-        reversed: { keywords: "冷酷な判断・誤った決断・言葉の暴力・挫折", detail: "言葉のトゲで人を傷つけたり、独善的な理屈で誤った判断を下してしまう恐れがあります。優しさを。", advice: "正論を振りかざして相手を追い詰めるのをやめ、柔軟な配慮を持ちましょう。" },
-        yesno: "YES（確固たる決断を）"
+        upright: { keywords: "明晰な思考・決断力・真実の勝利・突破口・知性", detail: "雲から伸びた手が王冠を戴く剣を握りしめています。迷いを断ち切る鋭い決断と知性で、どんな難局も突破できます。", advice: "情に流されず、事実と論理に基づいて迷わずスパッと決断を下しましょう。" },
+        reversed: { keywords: "冷酷な判断・誤った決断・口論・暴力的な言葉・挫折", detail: "言葉の刃で相手を深く傷つけたり、独善的な判断で失敗を招く恐れがあります。攻撃的な態度は改めましょう。", advice: "言葉遣いに細心の注意を払い、感情的な批判や言い争いを避けてください。" },
+        yesno: "YES（明晰な決断が道を開く）"
       },
       {
         id: "s_02", file: "s02.jpg", type: "minor", suit: "swords", suitName: "ソード", num: "2", name: "ソードの2",
-        upright: { keywords: "心の均衡・静かな対峙・保留・感情の遮断", detail: "目隠しをして胸の前で剣を交差させ、嵐の中で静かに均衡を保っています。決断を急がず心を落ち着ける時です。", advice: "焦って答えを出そうとせず、感情を静めて内なる平穏を取り戻しましょう。" },
-        reversed: { keywords: "偽りの均衡の崩壊・板挟み・直面すべき真実", detail: "見て見ぬ振りをしてきた問題から逃げられなくなります。目隠しを外し、現実と向き合う覚悟が必要です。", advice: "先送りをやめ、現実を直視してどちらかを選択する覚悟を決めてください。" },
-        yesno: "MAYBE（慎重な見極め）"
+        upright: { keywords: "心の均衡・緊張状態の維持・中立・感情の遮断・保留", detail: "目隠しをした女性が2本の剣を交差させています。感情を遮断し、どちらにも偏らない緊張の均衡を保っています。", advice: "今は無理に決着をつけず、感情を抑えて中立の立場を冷静に保ちましょう。" },
+        reversed: { keywords: "均衡の崩壊・真実の直視・優柔不断の打破・葛藤", detail: "見て見ぬ振りをしていた問題に向き合わざるを得なくなります。目隠しを外し、真実を受け入れる時です。", advice: "先送りをやめ、現実を直視して避けられない選択に踏み出してください。" },
+        yesno: "MAYBE（今は静観が賢明）"
       },
       {
         id: "s_03", file: "s03.jpg", type: "minor", suit: "swords", suitName: "ソード", num: "3", name: "ソードの3",
-        upright: { keywords: "心の痛み・別離・悲痛な真実・失恋", detail: "ハートに突き刺さる3本の剣。痛みを伴う別れやショックな事実を受け止めなければならない試練の時です。", advice: "悲しみを無理に押し込めず、しっかり泣いて心の毒を涙とともに洗い流しましょう。" },
-        reversed: { keywords: "心の回復・傷の癒やし・痛みの受容", detail: "激しい苦痛の峠を越え、傷口が少しずつ塞がってきています。時間をかけて確かな回復へ向かっています。", advice: "過去の痛みに執着せず、自分を優しく許して回復を待ちましょう。" },
-        yesno: "NO（痛みの受容が必要）"
+        upright: { keywords: "心の痛み・別離・悲痛な真実・拒絶・深い傷", detail: "雨降る空の下、3本の剣がハートを貫いています。辛い裏切りやすれ違いによる痛みを経験しますが、真実を知るための通過儀礼です。", advice: "痛みを無理に誤魔化さず、しっかり泣いて受け止めることで心の浄化を図りましょう。" },
+        reversed: { keywords: "心の回復・傷の癒え・和解の兆し・痛みの克服", detail: "最悪の心の痛みを通り抜け、傷口が徐々に塞がり始めています。許しと回復のプロセスが進んでいます。", advice: "過去の痛みにいつまでも囚われず、前を向いて新しい人間関係を築きましょう。" },
+        yesno: "NO（心の痛みにケアが必要）"
       },
       {
         id: "s_04", file: "s04.jpg", type: "minor", suit: "swords", suitName: "ソード", num: "4", name: "ソードの4",
-        upright: { keywords: "休息・静養・充電・戦線離脱・瞑想", detail: "戦いを一時中断し、静かな聖堂で横たわって心身を休める時です。今は動くべきではなく、回復が最優先です。", advice: "無理な活動を一切止め、スマートフォンを置いて心身を深く休ませてください。" },
+        upright: { keywords: "急速な休息・一時休戦・充電・静寂・瞑想", detail: "教会の中で横たわり静かに祈りを捧げる騎士。戦いを一時中断し、傷ついた心身を回復させるための神聖な充電期です。", advice: "今は活動をストップし、スマホや仕事から離れて徹底的に休息を取ってください。" },
         reversed: { keywords: "活動再開・充電完了・社会復帰・覚醒", detail: "十分な休息を経てエネルギーが満ち、再び立ち上がる準備が整いました。前線への復帰のサインです。", advice: "ベッドから起き上がり、新しい気持ちで活動をゆっくり再開させましょう。" },
         yesno: "NO（今は休むべき）"
       },
@@ -979,6 +1118,7 @@
     let currentDeckFilter = 'full'; // 'full' | 'major' | 'minor'
     let currentSpreadMode = 'one';  // 'one' | 'three' | 'relation' | 'celtic' | 'yesno'
     let lastDrawnResults = [];
+    let currentDisplayMode = 'grid'; // 'grid' | 'swipe'
 
     function setDeckFilter(filter, btn) {
       currentDeckFilter = filter;
@@ -992,11 +1132,30 @@
       btn.classList.add('active');
     }
 
+    function toggleDisplayMode(mode) {
+      currentDisplayMode = mode;
+      const area = document.getElementById('displayArea');
+      const btnGrid = document.getElementById('btnGrid');
+      const btnSwipe = document.getElementById('btnSwipe');
+
+      if (mode === 'swipe') {
+        area.classList.add('swipe-mode');
+        btnSwipe.classList.add('active');
+        btnGrid.classList.remove('active');
+      } else {
+        area.classList.remove('swipe-mode');
+        btnGrid.classList.add('active');
+        btnSwipe.classList.remove('active');
+      }
+    }
+
     /* ========================================================
        カード展開ロジック
        ======================================================== */
     function performDraw() {
       const area = document.getElementById('displayArea');
+      const viewBar = document.getElementById('viewBar');
+      const cardCountIndicator = document.getElementById('cardCountIndicator');
       area.innerHTML = '';
       lastDrawnResults = [];
 
@@ -1011,38 +1170,64 @@
       // シャッフル
       const shuffled = [...pool].sort(() => Math.random() - 0.5);
 
-      if (currentSpreadMode === 'one') {
-        renderCard(area, shuffled[0], "今の託宣");
-      } else if (currentSpreadMode === 'three') {
-        renderCard(area, shuffled[0], "1. 過去 / これまで");
-        renderCard(area, shuffled[1], "2. 現在 / 直面する課題");
-        renderCard(area, shuffled[2], "3. 近い未来 / 展望");
-      } else if (currentSpreadMode === 'relation') {
-        renderCard(area, shuffled[0], "1. お相手の現状・余裕");
-        renderCard(area, shuffled[1], "2. あなたへの本音・印象");
-        renderCard(area, shuffled[2], "3. 課題やすれ違いの原因");
-        renderCard(area, shuffled[3], "4. あなたからの接し方");
-      } else if (currentSpreadMode === 'celtic') {
-        renderCard(area, shuffled[0], "1. 現状 (要)");
-        renderCard(area, shuffled[1], "2. 試練 / 障害");
-        renderCard(area, shuffled[2], "3. 潜在意識 / 根底");
-        renderCard(area, shuffled[3], "4. 過去 / 背景");
-        renderCard(area, shuffled[4], "5. 顕在意識 / 目標");
-        renderCard(area, shuffled[5], "6. 近い未来");
-        renderCard(area, shuffled[6], "7. 本人の立場・姿勢");
-        renderCard(area, shuffled[7], "8. 周囲の環境・他者");
-        renderCard(area, shuffled[8], "9. 希望と不安");
-        renderCard(area, shuffled[9], "10. 最終結果");
-      } else if (currentSpreadMode === 'yesno') {
-        renderCard(area, shuffled[0], "Yes / No 託宣", true);
+      const spreadMap = {
+        one: [{ title: "今の託宣", isYesNo: false }],
+        three: [
+          { title: "1. 過去 / これまで", isYesNo: false },
+          { title: "2. 現在 / 直面する課題", isYesNo: false },
+          { title: "3. 近い未来 / 展望", isYesNo: false }
+        ],
+        relation: [
+          { title: "1. お相手の現状・余裕", isYesNo: false },
+          { title: "2. あなたへの本音・印象", isYesNo: false },
+          { title: "3. 課題やすれ違いの原因", isYesNo: false },
+          { title: "4. あなたからの接し方", isYesNo: false }
+        ],
+        celtic: [
+          { title: "1. 現状 (要)", isYesNo: false },
+          { title: "2. 試練 / 障害", isYesNo: false },
+          { title: "3. 潜在意識 / 根底", isYesNo: false },
+          { title: "4. 過去 / 背景", isYesNo: false },
+          { title: "5. 顕在意識 / 目標", isYesNo: false },
+          { title: "6. 近い未来", isYesNo: false },
+          { title: "7. 本人の立場・姿勢", isYesNo: false },
+          { title: "8. 周囲の環境・他者", isYesNo: false },
+          { title: "9. 希望と不安", isYesNo: false },
+          { title: "10. 最終結果", isYesNo: false }
+        ],
+        yesno: [{ title: "Yes / No 託宣", isYesNo: true }]
+      };
+
+      const selectedSpread = spreadMap[currentSpreadMode];
+
+      // 複数枚の場合はビュー切替バーを表示
+      if (selectedSpread.length > 1) {
+        viewBar.style.display = 'flex';
+        cardCountIndicator.textContent = `${selectedSpread.length} 枚展開`;
+        if (window.innerWidth < 640 && selectedSpread.length >= 4) {
+          toggleDisplayMode('swipe');
+        } else {
+          toggleDisplayMode('grid');
+        }
+      } else {
+        viewBar.style.display = 'none';
+        toggleDisplayMode('grid');
       }
+
+      selectedSpread.forEach((slotInfo, index) => {
+        renderCard(area, shuffled[index], slotInfo.title, slotInfo.isYesNo, index);
+      });
 
       updateOverallPanel();
       if (window.lucide) lucide.createIcons();
+
+      setTimeout(() => {
+        area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     }
 
-    function renderCard(container, cardData, slotTitle, isYesNo = false) {
-      const isReversed = Math.random() < 0.45; // 45%で逆位置
+    function renderCard(container, cardData, slotTitle, isYesNo = false, delayIndex = 0) {
+      const isReversed = Math.random() < 0.45;
       const detailData = isReversed ? cardData.reversed : cardData.upright;
 
       lastDrawnResults.push({
@@ -1063,16 +1248,24 @@
         yesnoHtml = `<div class="yesno-badge ${badgeClass}">${cardData.yesno}</div>`;
       }
 
-      // 画像エラー時は「bh.jpg」またはフォールバック表示
       const fileName = cardData.file;
 
       slot.innerHTML = `
         <div class="slot-label">${slotTitle}</div>
-        <div class="card-frame">
-          <img src="${fileName}" 
-               alt="${cardData.name}" 
-               class="${isReversed ? 'reversed' : ''}"
-               onerror="this.onerror=null; this.src='bh.jpg'; this.onerror=function(){ this.parentElement.innerHTML='<div class=\\'card-back-fallback\\'>✦<br><b style=\\'font-size:13px;margin-top:6px;\\'>${cardData.name}</b><span style=\\'font-size:10px;color:#a49cb2;margin-top:4px;\\'>(${fileName})</span></div>'; };">
+        <div class="card-flip-container">
+          <div class="card-flipper" id="flipper-${delayIndex}">
+            <!-- 裏面（初期） -->
+            <div class="card-back-side">
+              <img src="bh.jpg" alt="Card Back" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-back-fallback\\'>✦<br><span style=\\'font-size:10px;color:#a49cb2;margin-top:4px;\\'>TAROT</span></div>';">
+            </div>
+            <!-- 表面（めくられた後） -->
+            <div class="card-front">
+              <img src="${fileName}" 
+                   alt="${cardData.name}" 
+                   class="${isReversed ? 'reversed' : ''}"
+                   onerror="this.onerror=null; this.src='bh.jpg'; this.onerror=function(){ this.parentElement.innerHTML='<div class=\\'card-back-fallback\\'>✦<br><b style=\\'font-size:12px;margin-top:4px;\\'>${cardData.name}</b><span style=\\'font-size:9px;color:#a49cb2;\\'>(${fileName})</span></div>'; };">
+            </div>
+          </div>
         </div>
         <div class="card-details">
           ${yesnoHtml}
@@ -1092,6 +1285,11 @@
       `;
 
       container.appendChild(slot);
+
+      setTimeout(() => {
+        const flipper = document.getElementById(`flipper-${delayIndex}`);
+        if (flipper) flipper.classList.add('flipped');
+      }, 120 + delayIndex * 150);
     }
 
     /* ========================================================
